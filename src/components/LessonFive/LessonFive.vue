@@ -1,0 +1,226 @@
+<template>
+  <div id="app">
+    <b-container fluid>
+      <h3 class="text-center">Lesson 5 of 20</h3>
+      <b-progress height="20px" :value="value" :max="max"></b-progress>
+    </b-container>
+    <br>
+
+    <b-container fluid>
+      <b-row>
+
+        <b-col class="col-md-3 d-flex align-items-stretch">
+
+            <b-card header="Lesson 5"
+                header-tag="header"
+                title="Storing numbers in variables ">
+            <p class="card-text">Great! You’ve created your first pizza by creating a pizza variable and setting it to the boolean, true. We’ve also learned how to properly name our variables using camel case and learned how to write comments. We are ready to start writing more complicated JavaScript!
+
+              There are a lot of different types of information we can store inside of variables. In this lesson, we’re going to talk about storing numbers in variables!
+
+              You can store any number inside a variable, whether it’s a regular number like 7, a negative number like -28, or a decimal like 0.3. These numbers can be as large or as small as you want.
+
+              Let’s create multiple pizza’s by setting our pizza variable to 3!
+
+            </p>
+        </b-card>
+          </b-col>
+
+          <b-col class ="col-md-5 d-flex align-items-stretch">
+            <b-card header="Pizza Creation Station"
+                header-tag="header"
+                title="Let's make a pizza!">
+            <app-editor :code="code" @codeWasChanged="code = $event"></app-editor>
+            </b-card>
+          </b-col>
+
+          <b-col class="col-md-4 d-flex align-items-stretch">
+            <b-card header="Chef's Table"
+                header-tag="header"
+                title="Your Pizza">
+            <div class="text-center parent">
+              <transition name="fade" mode="out-in">
+                <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
+              </transition>
+                  <img class="cuttingboard" src="../../../cuttingboard.png">
+              </div>
+            </b-card>
+          </b-col>
+
+      </b-row>
+    </b-container>
+
+    <br>
+
+<div>
+  <b-modal v-model ="showLessonDetails" hide-footer title="Codemoji JavaScript">
+      <div class="d-block text-center">
+        <h3>Lesson 5: Storing numbers in variables  </h3>
+      </div>
+    Great! You’ve created your first pizza by creating a pizza variable and setting it to the boolean, true. We’ve also learned how to properly name our variables using camel case and learned how to write comments. We are ready to start writing more complicated JavaScript!
+
+    There are a lot of different types of information we can store inside of variables. In this lesson, we’re going to talk about storing numbers in variables!
+
+    You can store any number inside a variable, whether it’s a regular number like 7, a negative number like -28, or a decimal like 0.3. These numbers can be as large or as small as you want.
+
+    Let’s create multiple pizza’s by setting our pizza variable to 3!
+
+    <b-btn class="mt-3" variant="outline-primary" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
+    </b-modal>
+    <b-modal ref="myModalRef" hide-footer title="Codemoji JavaScript">
+      <div class="d-block text-center">
+        <h3>Great job! </h3>
+      </div>
+      <b-btn class="mt-3" variant="outline-primary" block @click="showPizza">Submit and show animation</b-btn>
+    </b-modal>
+
+    <b-modal ref="myErrorRef" hide-footer title="Codemoji Objects">
+      <div class="d-block text-center">
+        <h3>Hmm, that's not quite right</h3>
+      </div>
+      <p>{{ errorMessage }}</p>
+      <b-btn class="mt-3" variant="outline-danger" block @click="hideError">Let me try again!</b-btn>
+    </b-modal>
+<b-btn @click="changeLesson">Next lesson</b-btn>
+  </div>
+
+  </div>
+</template>
+
+<script>
+import Editor from "./Editor";
+import Output from "./Output";
+export default {
+  data() {
+    return {
+      code: ``,
+      showAlert: false,
+      showOnloadModal: true,
+      answer: `varpizza=3;`,
+      value: 25,
+      max: 100,
+      showLessonDetails: true,
+      errorMessage: '',
+      pizza: false
+    }
+  },
+  components: {
+    appEditor: Editor,
+    appOutput: Output
+  },
+  methods: {
+    changeLesson () {
+      this.$refs.myModalRef.hide()
+      this.$emit('lessonChanged')
+    },
+    showPizza () {
+      this.pizza = true;
+      this.$refs.myModalRef.hide();
+    },
+    showModal () {
+      this.$refs.myModalRef.show()
+    },
+    hideModal () {
+      this.$refs.myModalRef.hide()
+    },
+    showError() {
+      this.$refs.myErrorRef.show();
+    },
+    hideError() {
+      this.$refs.myErrorRef.hide();
+    },
+    checkAnswer() {
+      let myAnswer = this.code.toLowerCase().split('');
+      //removes spaces from code so that students won't get errors for spacing
+      for(let i = 0; i < myAnswer.length; i++) {
+        if (myAnswer[i] === ' ') {
+          console.log(myAnswer)
+          myAnswer.splice(i, 1);
+        }
+      }
+
+      if(myAnswer.length> 13) {
+        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var pizza = 3;"
+      } else if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
+        this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
+      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7] !== 'pizza') {
+        this.errorMessage = "Looks like you forgot to type 'pizza' or misspelled it, go back and try again!";
+      } else if (myAnswer[8]!=='=') {
+        this.errorMessage = "Looks like you missed your equals sign after pizza. Place one there and try again!"
+      } else if (myAnswer[9] !== "3") {
+        this.errorMessage = "Looks like you forgot your 3. Try again!"
+      } else if(myAnswer[10]!==';') {
+        this.errorMessage = "Whoops, looks like you missed a semicolon (;), make sure to add one after the word 'pizza'!"
+      } else if(myAnswer!== this.answer) {
+        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var pizza = 3;"
+      }
+
+      myAnswer= myAnswer.join('');
+      if(myAnswer == this.answer) {
+        this.showModal();
+      } else if (myAnswer !== this.answer){
+        this.showError();
+      }
+    }
+  },
+  watch: {
+    code: function() {
+      this.checkAnswer();
+    }
+  }
+
+}
+</script>
+
+<style>
+
+.parent {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+
+.cuttingboard {
+  width: 93%;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.pizza {
+  position: absolute;
+  margin-top: 70px;
+  margin-left: 60px;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 60%;
+}
+h1, h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+
+.fade-enter {
+        opacity: 0;
+    }
+    .fade-enter-active {
+        transition: opacity 0.5s;
+    }
+    .fade-leave-active {
+        transition: opactiy 0.5s;
+        opacity: 0;
+    }
+</style>
