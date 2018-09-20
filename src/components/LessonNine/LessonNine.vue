@@ -11,9 +11,8 @@
 
         <b-col class="col-md-3 d-flex align-items-stretch">
 
-            <b-card header="Lesson 9"
-                header-tag="header"
-                title="Divide Numbers in Variables">
+            <b-card header="Divide Numbers in Variables"
+                header-tag="header">
             <p class="card-text">Lastly, let's divide two numbers like this:
 
               var divide = 2/1;
@@ -24,38 +23,42 @@
           </b-col>
 
           <b-col class ="col-md-5 d-flex align-items-stretch">
-            <b-card header="Pizza Creation Station"
-                header-tag="header"
-                title="Let's make a pizza!">
-            <app-editor :code="code" @codeWasChanged="code = $event"></app-editor>
+            <b-card header="Chef Leo is here to help! Follow his instructions below!"
+                header-tag="header">
+              <b-container>
+                <b-row>
+                  <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
+                  <b-col class="col-md-9">
+                    <b-list-group>
+                      <b-list-group-item> Divide your pizza's by three</b-list-group-item>
+                    </b-list-group>
+                  </b-col>
+                </b-row>
+              </b-container>
+              <md-card>
+                <md-card-media>
+                  <div class="codemirror">
+                    <codemirror v-model="code" :options="cmOption"></codemirror>
+                  </div>
+                </md-card-media>
+              </md-card>
+              <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
+              <b-btn @click="resetCode" variant="danger" block>Reset</b-btn>
             </b-card>
           </b-col>
 
           <b-col class="col-md-4 d-flex align-items-stretch">
             <b-card header="Chef's Table"
-                header-tag="header"
-                title="Your Pizza">
-            <div class="text-center parent">
-              <ul>
-                <li>
-              <transition name="fade" mode="out-in">
-                <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
-              </transition>
-                  <img class="cuttingboard" src="../../../cuttingboard.png">
-                </li>
-                <li>
-                  <transition name="fade" mode="out-in">
-                    <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
-                  </transition>
-                  <img class="cuttingboard" src="../../../cuttingboard.png">
-                </li>
-                <li>
-                  <transition name="fade" mode="out-in">
-                    <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
-                  </transition>
-                  <img class="cuttingboard" src="../../../cuttingboard.png">
-                </li>
-              </ul>
+                header-tag="header">
+              <div class="text-center parent">
+                <transition name="fade" mode="out-in">
+                  <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
+                </transition>
+
+                <img class="cuttingboard" src="../../../cuttingboard.png">
+              </div>
+              <div class="card-footer">
+                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
               </div>
             </b-card>
           </b-col>
@@ -63,12 +66,11 @@
       </b-row>
     </b-container>
 
-    <br>
 
 <div>
   <b-modal v-model ="showLessonDetails" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h3>Lesson 9: Divide Numbers in Variables</h3>
+        <h4>Lesson 9: Divide Numbers in Variables</h4>
       </div>
     Lastly, let's divide two numbers like this:
 
@@ -76,31 +78,28 @@
 
     Divide your six vegetable pizzas by three
 
-    <b-btn class="mt-3" variant="outline-primary" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
+    <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
     <b-modal ref="myModalRef" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h3>Great job! </h3>
+        <h4>Great job! </h4>
       </div>
-      <b-btn class="mt-3" variant="outline-primary" block @click="showPizza">Submit and show animation</b-btn>
+      <b-btn class="mt-3" variant="success" block @click="showPizza">Submit and show animation</b-btn>
     </b-modal>
 
     <b-modal ref="myErrorRef" hide-footer title="Codemoji Objects">
       <div class="d-block text-center">
-        <h3>Hmm, that's not quite right</h3>
+        <h4>Hmm, that's not quite right</h4>
       </div>
       <p>{{ errorMessage }}</p>
-      <b-btn class="mt-3" variant="outline-danger" block @click="hideError">Let me try again!</b-btn>
+      <b-btn class="mt-3" variant="danger" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
-<b-btn @click="changeLesson" variant="success">Next lesson</b-btn>
-  <b-btn @click="resetCode" variant="error">Reset</b-btn>
   </div>
 
   </div>
 </template>
 
 <script>
-import Editor from "./Editor";
 import Output from "./Output";
 export default {
   data() {
@@ -113,11 +112,15 @@ export default {
       max: 100,
       showLessonDetails: true,
       errorMessage: '',
-      pizza: false
+      pizza: false,
+      cmOption: {
+        styleActiveLine: false,
+        lineNumbers: true,
+        line: true,
+      }
     }
   },
   components: {
-    appEditor: Editor,
     appOutput: Output
   },
   methods: {
@@ -180,12 +183,6 @@ export default {
       }
     }
   },
-  watch: {
-    code: function() {
-      this.checkAnswer();
-    }
-  }
-
 }
 </script>
 

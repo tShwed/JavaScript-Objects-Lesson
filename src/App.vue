@@ -1,12 +1,12 @@
 <template>
   <div id="app">
 
-      <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-          <img src="https://img.etsystatic.com/il/eda0e0/1343218232/il_570xN.1343218232_ct1b.jpg?version=0" width="30" height="30" class="d-inline-block align-top" alt="">
-          Codemoji
-        </a>
-      </nav>
+      <!--<nav class="navbar navbar-light bg-light">-->
+        <!--<a class="navbar-brand" href="#">-->
+          <!--<img src="https://img.etsystatic.com/il/eda0e0/1343218232/il_570xN.1343218232_ct1b.jpg?version=0" width="30" height="30" class="d-inline-block align-top" alt="">-->
+          <!--Codemoji-->
+        <!--</a>-->
+      <!--</nav>-->
 
       <div v-if="lessonOne" >
       <app-lesson-one :lessonOne="lessonOne" :secretMessage="secretMessage" @lessonChanged="lessonOne=!lessonOne; lessonTwo=!lessonTwo"></app-lesson-one>
@@ -94,4 +94,36 @@ export default {
 </script>
 
 <style>
+  * {
+    font-family: 'Montserrat', sans-serif;
+  }
+  body {
+    background-color: #2371c0;
+  }
+  h3 {
+    color: white;
+  }
+  .primary {
+    background-color: #29ad48;
+  }
+  .card-header {
+    background-color: #29ad48;
+    color: white;
+  }
+  .card {
+    border: none;
+    max-height: 600px
+  }
+  .modal-header {
+    background-color: #29ad48;
+    color: white
+  }
+  .codemoji-logo {
+    width: 17%
+  }
+  .card-footer {
+    background-color: white;
+    border: none;
+    padding: 1px;
+  }
 </style>

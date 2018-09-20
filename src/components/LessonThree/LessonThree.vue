@@ -11,25 +11,35 @@
 
         <b-col class="col-md-3 d-flex align-items-stretch">
 
-            <b-card header="Lesson 3"
-                header-tag="header"
-                title="Naming variables using camel case">
-            <b-form-textarea id="textarea3" plaintext :value="lessonDetails"></b-form-textarea>
+            <b-card header="Naming variables using camel case"
+                header-tag="header">
+            <b-form-textarea style="width: 289px; height: 515px;" plaintext :value="lessonDetails"></b-form-textarea>
         </b-card>
           </b-col>
 
           <b-col class ="col-md-5 d-flex align-items-stretch">
-            <b-card header="Pizza Creation Station"
-                header-tag="header"
-                title="Let's make a pizza!">
-            <app-editor :code="code" @codeWasChanged="code = $event"></app-editor>
+            <b-card header="Chef Leo is here to help! Follow his instructions below!"
+                header-tag="header">
+              <b-container>
+                <b-row>
+                  <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
+                  <b-col class="col-md-9">
+                    <b-list-group>
+                      <b-list-group-item> 1: Give your variable the name 'pepperoni pizza' using camel case;</b-list-group-item>
+                    </b-list-group>
+                  </b-col>
+                </b-row>
+              </b-container>
+                  <div class="codemirror">
+                    <codemirror v-model="code" :options="cmOption"></codemirror>
+                  </div>
+              <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
             </b-card>
           </b-col>
 
           <b-col class="col-md-4 d-flex align-items-stretch">
             <b-card header="Chef's Table"
-                header-tag="header"
-                title="Your Pizza">
+                header-tag="header">
             <div class="text-center parent">
               <img class="pizza" src="../../../pizza.jpg">
               <img class="cuttingboard" src="../../../cuttingboard.png">
@@ -45,7 +55,7 @@
 <div>
   <b-modal v-model ="showLessonDetails" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h3>Lesson 3: Naming variables using camel case </h3>
+        <h4>Lesson 3: Naming variables using camel case </h4>
       </div>
     You’ve filled your variable with some data, awesome! Before we continue with filling our variables with other types of data, we should touch on how to properly name our variables.
 
@@ -63,21 +73,21 @@
     We use camel case to make our variable names very clear for what they’re being used for and easy to read.
 
     Let’s fix the following variable names and write them in camel case
-      <b-btn class="mt-3" variant="outline-primary" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
+      <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
     <b-modal ref="myModalRef" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h3>Great job! </h3>
+        <h4>Great job! </h4>
       </div>
-      <b-btn class="mt-3" variant="outline-primary" block @click="changeLesson">Submit and show animation</b-btn>
+      <b-btn class="mt-3" variant="success" block @click="changeLesson">Submit and show animation</b-btn>
     </b-modal>
 
     <b-modal ref="myErrorRef" hide-footer title="Codemoji Objects">
       <div class="d-block text-center">
-        <h3>Hmm, that's not quite right</h3>
+        <h4>Hmm, that's not quite right</h4>
       </div>
       <p>{{ errorMessage }}</p>
-      <b-btn class="mt-3" variant="outline-danger" block @click="hideError">Let me try again!</b-btn>
+      <b-btn class="mt-3" variant="danger" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
 
   </div>
@@ -86,8 +96,13 @@
 </template>
 
 <script>
-import Editor from "./Editor";
-import Output from "./Output";
+  // language
+  import 'codemirror/mode/javascript/javascript.js'
+  // require active-line.js
+  import'codemirror/addon/selection/active-line.js'
+  import'codemirror/mode/clike/clike.js'
+  import'codemirror/addon/comment/comment.js'
+  import Output from "./Output";
 export default {
   data() {
     return {
@@ -98,6 +113,11 @@ export default {
       value: 15,
       max: 100,
       showLessonDetails: true,
+      cmOption: {
+        styleActiveLine: false,
+        lineNumbers: true,
+        line: true,
+      },
       errorMessage: '',
       lessonDetails: 'You’ve filled your variable with some data, awesome! Before we continue with filling our variables with other types of data, we should touch on how to properly name our variables.\n' +
         '\n' +
@@ -119,7 +139,6 @@ export default {
     }
   },
   components: {
-    appEditor: Editor,
     appOutput: Output
   },
   methods: {
@@ -169,11 +188,6 @@ export default {
       } else if (myAnswer !== this.answer){
         this.showError();
       }
-    }
-  },
-  watch: {
-    code: function() {
-      this.checkAnswer();
     }
   }
 

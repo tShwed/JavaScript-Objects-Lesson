@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-container fluid>
-      <h3 class="text-center">Lesson 4 of 20</h3>
+      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 4 of 20</h3>
       <b-progress height="20px" :value="value" :max="max"></b-progress>
     </b-container>
     <br>
@@ -11,33 +11,45 @@
 
         <b-col class="col-md-3 d-flex align-items-stretch">
 
-            <b-card header="Lesson 4"
-                header-tag="header"
-                title="Comments in JavaScript Code">
-            <p class="card-text">As our code gets more complicated, it becomes harder to understand. This is why JavaScript lets us leave notes in our code that is ignored by our computer when it runs our programs. These notes are called Comments.
+            <b-card header="Comments in JavaScript Code"
+                header-tag="header">
+              <b-form-textarea plaintext style="width: 289px; height: 515px;" value="As our code gets more complicated, it becomes harder to understand. This is why JavaScript lets us leave notes in our code that is ignored by our computer when it runs our programs. These notes are called Comments.
 
               Comments are notes that can be left in JavaScript for the purpose of explaining the code we wrote to other programmers who may be working with our code, or ourselves in the future if we have to work with the code in the future. It’s easy to forget why we wrote our code and what our programs do!
 
               To write a comment, simply type two backslashes ( // ) and type whatever comment you want into the code.
 
-              Write a comment in the editor that says “// My first comment!”
-
-            </p>
+              Write a comment in the editor that says “// My first comment!”"></b-form-textarea>
         </b-card>
           </b-col>
 
           <b-col class ="col-md-5 d-flex align-items-stretch">
-            <b-card header="Pizza Creation Station"
-                header-tag="header"
-                title="Let's make a pizza!">
-            <app-editor :code="code" @codeWasChanged="code = $event"></app-editor>
+            <b-card header="Chef Leo is here to help! Follow his instructions below!"
+                header-tag="header">
+              <b-container>
+                <b-row>
+                  <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
+                  <b-col class="col-md-9">
+                    <b-list-group>
+                      <b-list-group-item> 1: Write a comment in your JavaScript code. Like this: //Hello, I am a comment!</b-list-group-item>
+                    </b-list-group>
+                  </b-col>
+                </b-row>
+              </b-container>
+              <md-card>
+                <md-card-media>
+                  <div class="codemirror">
+                    <codemirror v-model="code" :options="cmOption"></codemirror>
+                  </div>
+                </md-card-media>
+              </md-card>
+              <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
             </b-card>
           </b-col>
 
           <b-col class="col-md-4 d-flex align-items-stretch">
             <b-card header="Chef's Table"
-                header-tag="header"
-                title="Your Pizza">
+                header-tag="header">
             <div class="text-center parent">
               <img class="pizza" src="../../../pizza.jpg">
               <img class="cuttingboard" src="../../../cuttingboard.png">
@@ -53,7 +65,7 @@
 <div>
   <b-modal v-model ="showLessonDetails" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h3>Lesson 4: Comments in JavaScript code </h3>
+        <h4>Lesson 4: Comments in JavaScript code </h4>
       </div>
     As our code gets more complicated, it becomes harder to understand. This is why JavaScript lets us leave notes in our code that is ignored by our computer when it runs our programs. These notes are called Comments.
 
@@ -63,21 +75,21 @@
 
     Write a comment in the editor that says “// My first comment!”
 
-    <b-btn class="mt-3" variant="outline-primary" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
+    <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
     <b-modal ref="myModalRef" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h3>Great job! </h3>
+        <h4>Great job! </h4>
       </div>
-      <b-btn class="mt-3" variant="outline-primary" block @click="changeLesson">Submit and go to next lesson</b-btn>
+      <b-btn class="mt-3" variant="success" block @click="changeLesson">Submit and go to next lesson</b-btn>
     </b-modal>
 
     <b-modal ref="myErrorRef" hide-footer title="Codemoji Objects">
       <div class="d-block text-center">
-        <h3>Hmm, that's not quite right</h3>
+        <h4>Hmm, that's not quite right</h4>
       </div>
       <p>{{ errorMessage }}</p>
-      <b-btn class="mt-3" variant="outline-danger" block @click="hideError">Let me try again!</b-btn>
+      <b-btn class="mt-3" variant="danger" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
 
   </div>
@@ -86,7 +98,12 @@
 </template>
 
 <script>
-import Editor from "./Editor";
+  // language
+  import 'codemirror/mode/javascript/javascript.js'
+  // require active-line.js
+  import'codemirror/addon/selection/active-line.js'
+  import'codemirror/mode/clike/clike.js'
+  import'codemirror/addon/comment/comment.js'
 import Output from "./Output";
 export default {
   data() {
@@ -94,15 +111,19 @@ export default {
       code: ``,
       showAlert: false,
       showOnloadModal: true,
-      answer: ``,
+      answer: `// `,
       value: 20,
       max: 100,
       showLessonDetails: true,
-      errorMessage: ''
+      errorMessage: '',
+      cmOption: {
+        styleActiveLine: false,
+        lineNumbers: true,
+        line: true,
+      }
     }
   },
   components: {
-    appEditor: Editor,
     appOutput: Output
   },
   methods: {
@@ -123,13 +144,21 @@ export default {
       this.$refs.myErrorRef.hide();
     },
     checkAnswer() {
-      this.showModal();
-    },
-  },
-    watch: {
-      code: function () {
-        this.checkAnswer();
+      let myAnswer = this.code.toLowerCase().split('');
+      //removes spaces from code so that students won't get errors for spacing
+      for(let i = 0; i < myAnswer.length; i++) {
+        if (myAnswer[i] == ' ') {
+          myAnswer.splice(i, 1);
+        }
       }
+
+      if(myAnswer[0] ==='/'&& myAnswer[1] === '/' && myAnswer[2] !== undefined) {
+        this.showModal();
+      } else {
+        this.errorMessage = "Looks like you didn't type a comment. Make sure to type // before you write your commment"
+        this.showError();
+      }
+    },
     }
   }
 </script>

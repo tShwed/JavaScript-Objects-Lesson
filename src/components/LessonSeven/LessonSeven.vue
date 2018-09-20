@@ -25,23 +25,38 @@
           </b-col>
 
           <b-col class ="col-md-5 d-flex align-items-stretch">
-            <b-card header="Pizza Creation Station"
-                header-tag="header"
-                title="Let's make a pizza!">
-            <app-editor :code="code" @codeWasChanged="code = $event"></app-editor>
+            <b-card header="Chef Leo is here to help! Follow his instructions below!"
+                header-tag="header">
+              <b-container>
+                <b-row>
+                  <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
+                  <b-col class="col-md-9">
+                    <b-list-group>
+                      <b-list-group-item> Subtract 3 pizzas from your variable;</b-list-group-item>
+                    </b-list-group>
+                  </b-col>
+                </b-row>
+              </b-container>
+                  <div class="codemirror">
+                    <codemirror v-model="code" :options="cmOption">{{code}}</codemirror>
+                  </div>
+              <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
+              <b-btn @click="resetCode" class="btn-block" variant="danger">Reset Code</b-btn>
             </b-card>
           </b-col>
 
           <b-col class="col-md-4 d-flex align-items-stretch">
             <b-card header="Chef's Table"
-                header-tag="header"
-                title="Your Pizza">
+                header-tag="header">
             <div class="text-center parent">
               <transition name="fade" mode="out-in">
                 <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
               </transition>
 
               <img class="cuttingboard" src="../../../cuttingboard.png">
+              </div>
+              <div class="card-footer">
+                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
               </div>
             </b-card>
           </b-col>
@@ -54,7 +69,7 @@
 <div>
   <b-modal v-model ="showLessonDetails" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h3>Lesson 7: Subtracting Numbers in Variables</h3>
+        <h4>Lesson 7: Subtracting Numbers in Variables</h4>
       </div>
     We've successfully added two numbers in a variable! Now let's subtract two numbers.
 
@@ -63,23 +78,22 @@
 
     Subtract three pepperoni pizza's from your pizza variable
 
-    <b-btn class="mt-3" variant="outline-primary" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
+    <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
     <b-modal ref="myModalRef" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h3>Great job! </h3>
+        <h4>Great job! </h4>
       </div>
-      <b-btn class="mt-3" variant="outline-primary" block @click="showPizza">Submit and show animation</b-btn>
+      <b-btn class="mt-3" variant="success" block @click="showPizza">Submit and show animation</b-btn>
     </b-modal>
 
     <b-modal ref="myErrorRef" hide-footer title="Codemoji Objects">
       <div class="d-block text-center">
-        <h3>Hmm, that's not quite right</h3>
+        <h4>Hmm, that's not quite right</h4>
       </div>
       <p>{{ errorMessage }}</p>
-      <b-btn class="mt-3" variant="outline-danger" block @click="hideError">Let me try again!</b-btn>
+      <b-btn class="mt-3" variant="success" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
-<b-btn @click="changeLesson" variant="success">Next lesson</b-btn>
   <b-btn @click="resetCode" variant="error">Reset</b-btn>
   </div>
 
@@ -87,8 +101,13 @@
 </template>
 
 <script>
-import Editor from "./Editor";
-import Output from "./Output";
+  import 'codemirror/mode/javascript/javascript.js'
+  // require active-line.js
+  import'codemirror/addon/selection/active-line.js'
+  import'codemirror/mode/clike/clike.js'
+  import'codemirror/addon/comment/comment.js'
+
+  import Output from "./Output";
 export default {
   data() {
     return {
@@ -100,11 +119,15 @@ export default {
       max: 100,
       showLessonDetails: true,
       errorMessage: '',
-      pizza: false
+      pizza: false,
+      cmOption: {
+        styleActiveLine: false,
+        lineNumbers: true,
+        line: true,
+      }
     }
   },
   components: {
-    appEditor: Editor,
     appOutput: Output
   },
   methods: {
@@ -165,11 +188,6 @@ export default {
       } else if (myAnswer !== this.answer){
         this.showError();
       }
-    }
-  },
-  watch: {
-    code: function() {
-      this.checkAnswer();
     }
   }
 
