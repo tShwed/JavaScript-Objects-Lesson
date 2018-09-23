@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-container fluid>
-      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 9 of 20</h3>
+      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 10 of 20</h3>
       <b-progress height="20px" :value="value" :max="max"></b-progress>
     </b-container>
     <br>
@@ -11,14 +11,17 @@
 
         <b-col class="col-md-3 d-flex align-items-stretch">
 
-            <b-card header="Divide Numbers in Variables"
+            <b-card header="Strings"
                 header-tag="header">
-            <p class="card-text">Lastly, let's divide two numbers like this:
+              <b-form-textarea plaintext style="width: 289px; height: 515px;" value="Now that we understand how booleans and numbers can be stored and used in variables, we’ll look at another type of data, a String.
 
-              var divide = 2/1;
+              A string is a collection of characters that are surrounded by either single(‘ ’) or double(“ ”) quotes. These characters can be anything: letters, numbers, or symbols. As long as they are wrapped by single or double quotes, JavaScript will read the data as a string.
 
-              Divide your six vegetable pizzas by three
-            </p>
+              Strings can be used for a variety of different things, but the most common is to display a message to the user of your website or app.
+
+              Let’s put a string inside of our pizza variable. Let’s put your name in a string along with pizza at the end, so everyone knows this is your pizza. Remember, you can use either single or double quotes.
+
+              Make your code look like this: var pizza = “Leo’s Pizza” replace Leo with your name"></b-form-textarea>
         </b-card>
           </b-col>
 
@@ -30,7 +33,7 @@
                   <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
                   <b-col class="col-md-9">
                     <b-list-group>
-                      <b-list-group-item> Divide your pizza's by three</b-list-group-item>
+                      <b-list-group-item>Replace Jim's name with your name in the string</b-list-group-item>
                     </b-list-group>
                   </b-col>
                 </b-row>
@@ -50,9 +53,10 @@
           <b-col class="col-md-4 d-flex align-items-stretch">
             <b-card header="Chef's Table"
                 header-tag="header">
+              <h5>{{pizzaLabel}}</h5>
               <div class="text-center parent">
                 <transition name="fade" mode="out-in">
-                  <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
+                  <img class="pizza" src="../../../pizza.jpg">
                 </transition>
 
                 <img class="cuttingboard" src="../../../cuttingboard.png">
@@ -70,13 +74,17 @@
 <div>
   <b-modal v-model ="showLessonDetails" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h4>Lesson 9: Divide Numbers in Variables</h4>
+        <h4>Lesson 10: Strings</h4>
       </div>
-    Lastly, let's divide two numbers like this:
+    Now that we understand how booleans and numbers can be stored and used in variables, we’ll look at another type of data, a String.
 
-    var divide = 2/1;
+    A string is a collection of characters that are surrounded by either single(‘ ’) or double(“ ”) quotes. These characters can be anything: letters, numbers, or symbols. As long as they are wrapped by single or double quotes, JavaScript will read the data as a string.
 
-    Divide your six vegetable pizzas by three
+    Strings can be used for a variety of different things, but the most common is to display a message to the user of your website or app.
+
+    Let’s put a string inside of our pizza variable. Let’s put your name in a string along with pizza at the end, so everyone knows this is your pizza. Remember, you can use either single or double quotes.
+
+    Make your code look like this: var pizza = “Jim’s Pizza” replace Jim's name with your name
 
     <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
@@ -104,14 +112,15 @@ import Output from "./Output";
 export default {
   data() {
     return {
-      code: `var vegetablePizza = 6;`,
+      code: `var myName = "Jim";`,
       showAlert: false,
       showOnloadModal: true,
-      answer: `varvegetablepizza=6/3;`,
-      value: 45,
+      answer: `varmyName="";`,
+      value: 50,
       max: 100,
       showLessonDetails: true,
       errorMessage: '',
+      pizzaLabel: ' ',
       pizza: false,
       cmOption: {
         styleActiveLine: false,
@@ -129,7 +138,7 @@ export default {
       this.$emit('lessonChanged')
     },
     resetCode () {
-      this.code = 'var vegetablePizza = 6;'
+      this.code = `var myName = "Jim";`
     },
     showPizza () {
       this.pizza = true;
@@ -146,6 +155,7 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+      this.errorMessage = ''
     },
     checkAnswer() {
       let myAnswer = this.code.toLowerCase().split('');
@@ -156,33 +166,47 @@ export default {
           myAnswer.splice(i, 1);
         }
       }
+      let answerLength = myAnswer.length -1
+      let answerLength2 = myAnswer.length -2
 
-      if(myAnswer.length> 22) {
-        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var vegetablePizza = 6/3;"
-      } else if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
+      if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
-      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11] !== 'vegetable') {
-        this.errorMessage = "Looks like you forgot to type 'vegetable' or misspelled it, go back and try again!";
-      } else if(myAnswer[12]+myAnswer[13]+myAnswer[14]+myAnswer[15]+myAnswer[16] !== 'pizza') {
-        this.errorMessage = "Looks like you forgot to type 'pizza' or misspelled it, go back and try again!";
-      } else if (myAnswer[17]!=='=') {
-        this.errorMessage = "Looks like you missed your equals sign after pizza. Place one there and try again!"
-      } else if (myAnswer[18]+myAnswer[19]+myAnswer[20] !== "6/3") {
-        this.errorMessage = "Looks like you either forgot to type 6/3 or mis-typed it. Try again!"
-      } else if(myAnswer[21]!==';') {
-        this.errorMessage = "Whoops, looks like you missed a semicolon (;), make sure to add one after the word 'pizza'!"
-      } else if(myAnswer!== this.answer) {
-        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var vegetablePizza = 6/3;"
+      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8] !== 'myname') {
+        this.errorMessage = "Looks like you forgot to type 'myName' or misspelled it, go back and try again!";
+      } else if (myAnswer[9]!=='=') {
+        this.errorMessage = "Looks like you missed your equals sign after your variable name. Place one there and try again!"
+      } else if (myAnswer[10] !== '"') {
+        this.errorMessage = "Looks like the first double quotation mark is missing, add it and try again!"
+      } else if(myAnswer[11]+myAnswer[12]+myAnswer[13] ==="Jim") {
+        this.errorMessage = "Don't forget to change Jim's name to your name!"
+      } else if(myAnswer[answerLength2] !== '"') {
+        this.errorMessage = "Looks like you missed your second quotation mark. Add it and try again"
+      } else if(myAnswer[answerLength] !== ';') {
+        this.errorMessage = "Looks like you missed your semicolon. Make sure to add one at the end of your variable"
       }
 
-      myAnswer= myAnswer.join('');
-      if(myAnswer == this.answer) {
+      if(this.errorMessage === '') {
         this.showModal();
-      } else if (myAnswer !== this.answer){
+        let studentName = []
+        for(let i = 11; i < myAnswer.length; i++) {
+          if (myAnswer[i] !== '"') {
+            studentName.push(myAnswer[i])
+          } else {
+            break
+          }
+        }
+        studentName = studentName.join('');
+        this.pizzaLabel = studentName+"'s Pizza"
+      } else if (this.errorMessage !== ''){
         this.showError();
       }
     }
   },
+  watch: {
+    code () {
+      this.errorMessage = ''
+    }
+  }
 }
 </script>
 
