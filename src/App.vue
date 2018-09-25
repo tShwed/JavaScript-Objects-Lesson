@@ -73,7 +73,7 @@ import LessonThirteen from './components/LessonThirteen/LessonThirteen'
 export default {
   data() {
     return {
-      lessonOne: false,
+      lessonOne: true,
       lessonTwo: false,
       lessonThree: false,
       lessonFour: false,
@@ -85,7 +85,7 @@ export default {
       lessonTen: false,
       lessonEleven: false,
       lessonTwelve: false,
-      lessonThirteen: true
+      lessonThirteen: false
     }
   },
   components: {
