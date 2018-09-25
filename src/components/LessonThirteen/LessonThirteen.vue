@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-container fluid>
-      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 5 of 20</h3>
+      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 13 of 20</h3>
       <b-progress height="20px" :value="value" :max="max"></b-progress>
     </b-container>
     <br>
@@ -13,13 +13,20 @@
 
             <b-card header="Lesson Instructions"
                 header-tag="header" style="min-width: 100%">
-              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="Great! You’ve created your first pizza by creating a pizza variable and setting it to the boolean, true. We’ve also learned how to properly name our variables using camel case and learned how to write comments. We are ready to start writing more complicated JavaScript!
+              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="Now we know how to put our data inside an array. But how will we access it?
 
-There are a lot of different types of information we can store inside of variables. In this lesson, we’re going to talk about storing numbers in variables!
+Every element in an array gets assigned a number. As you read the data from left to right, a number is assigned starting from zero. So the array [“hello”, “sir”, 4] would have each element represented by a number. “Hello” is assigned 0, “sir” is assigned 1, and the number 4 is assigned 2. As we add more elements to the array, the numbers continue to increment up by 1
 
-You can store any number inside a variable, whether it’s a regular number like 7, a negative number like -28, or a decimal like 0.3. These numbers can be as large or as small as you want.
+We can access these elements by using bracket notation after declaring the variable. For example:
 
-Let’s create multiple pizza’s by setting our pizza variable to 3!"></b-form-textarea>
+Var myArray = [“hello”, “sir”, 4]
+Var greeting = myArray[0]
+
+In this example, greeting would return “hello”
+
+Let’s give this a try by looking at a variable containing all different types of food. We're going to grab pizza from the food array so we will make the variable myLunch equal to pizza
+"
+></b-form-textarea>
         </b-card>
           </b-col>
 
@@ -31,28 +38,35 @@ Let’s create multiple pizza’s by setting our pizza variable to 3!"></b-form-
                   <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
                   <b-col class="col-md-9">
                     <b-list-group>
-                      <b-list-group-item> Create a pizza variable and assign it the number 3</b-list-group-item>
+                      <b-list-group-item>
+                        This is our food variable: var food = ["pizza", "hamburger", "sandwich"<br>
+                        Access the first element of this array with a variable called myLunch
+                      </b-list-group-item>
                     </b-list-group>
                   </b-col>
                 </b-row>
               </b-container>
+              <md-card>
+                <md-card-media>
                   <div class="codemirror">
                     <codemirror v-model="code" :options="cmOption"></codemirror>
                   </div>
+                </md-card-media>
+              </md-card>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
-              <b-btn @click="showReset" variant="danger" block>Reset my Code</b-btn>
+              <b-btn @click="showReset" variant="danger" block>Reset</b-btn>
             </b-card>
           </b-col>
 
           <b-col class="col-md-4 d-flex align-items-stretch">
             <b-card header="Chef's Table"
-                header-tag="header"
-                title="Your Pizza">
-            <div class="text-center parent">
-              <transition name="fade" mode="out-in">
-                <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
-              </transition>
-                  <img class="cuttingboard" src="../../../cuttingboard.png">
+                header-tag="header">
+              <div class="text-center parent">
+                <transition name="fade" mode="out-in">
+                  <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
+                </transition>
+
+                <img class="cuttingboard" src="../../../cuttingboard.png">
               </div>
               <div class="card-footer">
                 <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
@@ -63,21 +77,24 @@ Let’s create multiple pizza’s by setting our pizza variable to 3!"></b-form-
       </b-row>
     </b-container>
 
-    <br>
 
 <div>
   <b-modal v-model ="showLessonDetails" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h4>Lesson 5: Storing numbers in variables  </h4>
+        <h4>Lesson 13: Accessing data from an array</h4>
       </div>
-    Great! You’ve created your first pizza by creating a pizza variable and setting it to the boolean, true. We’ve also learned how to properly name our variables using camel case and learned how to write comments. We are ready to start writing more complicated JavaScript!
+    Now we know how to put our data inside an array. But how will we access it?
 
-    There are a lot of different types of information we can store inside of variables. In this lesson, we’re going to talk about storing numbers in variables!
+    Every element in an array gets assigned a number. As you read the data from left to right, a number is assigned starting from zero. So the array [“hello”, “sir”, 4] would have each element represented by a number. “Hello” is assigned 0, “sir” is assigned 1, and the number 4 is assigned 2. As we add more elements to the array, the numbers continue to increment up by 1
 
-    You can store any number inside a variable, whether it’s a regular number like 7, a negative number like -28, or a decimal like 0.3. These numbers can be as large or as small as you want.
+    We can access these elements by using bracket notation after declaring the variable. For example:
 
-    Let’s create multiple pizza’s by setting our pizza variable to 3!
+    Var myArray = [“hello”, “sir”, 4]
+    Var greeting = myArray[0]
 
+    In this example, greeting would return “hello”
+
+    Let’s give this a try by looking at a variable containing all different types of food. We're going to grab pizza from the food array so we will make the variable myLunch equal to pizza
     <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
     <b-modal ref="myModalRef" hide-footer title="Codemoji JavaScript">
@@ -104,18 +121,12 @@ Let’s create multiple pizza’s by setting our pizza variable to 3!"></b-form-
       <b-btn class="mt-3" block variant="primary" style="width: 50%" @click="hideReset">No, let me keep trying!</b-btn>
     </b-row>
   </b-modal>
-
   </div>
+
   </div>
 </template>
 
 <script>
-  // language
-  import 'codemirror/mode/javascript/javascript.js'
-  // require active-line.js
-  import'codemirror/addon/selection/active-line.js'
-  import'codemirror/mode/clike/clike.js'
-  import'codemirror/addon/comment/comment.js'
 import Output from "./Output";
 export default {
   data() {
@@ -123,8 +134,8 @@ export default {
       code: ``,
       showAlert: false,
       showOnloadModal: true,
-      answer: `varpizza=3;`,
-      value: 25,
+      answer: 'varmyLunch=food[0];',
+      value: 65,
       max: 100,
       showLessonDetails: true,
       errorMessage: '',
@@ -163,6 +174,7 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+      this.errorMessage = ''
     },
     showReset() {
       this.$refs.resetRef.show()
@@ -171,7 +183,7 @@ export default {
       this.$refs.resetRef.hide()
     },
     checkAnswer() {
-      let myAnswer = this.code.toLowerCase().split('');
+      let myAnswer = this.code.split('');
       //removes spaces from code so that students won't get errors for spacing
       for(let i = 0; i < myAnswer.length; i++) {
         if (myAnswer[i] === ' ') {
@@ -180,31 +192,33 @@ export default {
         }
       }
 
-      if(myAnswer.length> 13) {
-        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var pizza = 3;"
-      } else if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
-        this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
-      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7] !== 'pizza') {
-        this.errorMessage = "Looks like you forgot to type 'pizza' or misspelled it, go back and try again!";
-      } else if (myAnswer[8]!=='=') {
-        this.errorMessage = "Looks like you missed your equals sign after pizza. Place one there and try again!"
-      } else if (myAnswer[9] !== "3") {
-        this.errorMessage = "Looks like you forgot your 3. Try again!"
-      } else if(myAnswer[10]!==';') {
-        this.errorMessage = "Whoops, looks like you missed a semicolon (;), make sure to add one after the word 'pizza'!"
-      } else if(myAnswer!== this.answer) {
-        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var pizza = 3;"
-      }
+      let answerLength = myAnswer.length
 
+        if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
+        this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
+      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9] !== 'myLunch') {
+        this.errorMessage = "Looks like you forgot to type 'myLunch' or misspelled it, go back and try again!";
+      } else if (myAnswer[10]!=='=') {
+        this.errorMessage = "Looks like you missed your equals sign after your variable name. Place one there and try again!"
+      } else if(myAnswer[11]+myAnswer[12]+myAnswer[13]+myAnswer[14]!== 'food') {
+          this.errorMessage = "Don't forget to type the name of the array we're accessing. It's called 'food'"
+      } else if (myAnswer[15] !== '[') {
+        this.errorMessage = "Looks like you missed the first square bracket. Add it and try again!"
+      } else if(myAnswer[16]!== "0") {
+        this.errorMessage = "Remember, every item in an array gets assigned a number starting from 0. We are trying to access the first item in the food array"
+      } else if(myAnswer[17] !== ']') {
+        this.errorMessage = "Looks like you forgot your second square bracket. Try again!"
+      } else if(myAnswer[18] !== ';') {
+        this.errorMessage = "Don't forget your semi colon!"
+        }
       myAnswer= myAnswer.join('');
-      if(myAnswer == this.answer) {
+      if(this.errorMessage === '') {
         this.showModal();
-      } else if (myAnswer !== this.answer){
+      } else {
         this.showError();
       }
     }
-  },
-
+  }
 }
 </script>
 
@@ -215,7 +229,9 @@ export default {
   top: 0;
   left: 0;
 }
-
+.CodeMirror {
+  height: 250px
+}
 
 .cuttingboard {
   width: 93%;
@@ -233,10 +249,6 @@ export default {
   left: 0;
   z-index: 1;
   width: 60%;
-}
-
-.chef {
-  width: 75%
 }
 h1, h2 {
   font-weight: normal;
@@ -263,4 +275,7 @@ a {
         transition: opactiy 0.5s;
         opacity: 0;
     }
+.chef {
+  width: 75%;
+}
 </style>

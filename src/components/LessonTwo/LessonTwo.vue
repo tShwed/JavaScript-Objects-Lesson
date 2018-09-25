@@ -11,9 +11,9 @@
 
         <b-col class="col-md-3 d-flex align-items-stretch">
 
-            <b-card header="What is a Boolean?"
-                header-tag="header">
-              <b-form-textarea plaintext style="width: 289px; height: 515px;" value="You made your very first variable! Awesome! You’re probably wondering where your pizza is! Maybe you were expecting it because we created our pizza variable. So why didn’t it show up?
+            <b-card header="Lesson Instructions"
+                header-tag="header" style="min-width: 100%;">
+              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="You made your very first variable! Awesome! You’re probably wondering where your pizza is! Maybe you were expecting it because we created our pizza variable. So why didn’t it show up?
 
 It didn’t show up because while our variable has a name, it is empty. Variables can be filled with all sorts of information. In this lesson, we’re going to fill our variable with a Boolean
 
@@ -31,7 +31,7 @@ Set your variable to true by typing this: var pizza = true; "></b-form-textarea>
                   <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
                   <b-col class="col-md-9">
                     <b-list-group>
-                      <b-list-group-item> 1: Set var pizza to true, like this! var pizza = true;</b-list-group-item>
+                      <b-list-group-item>Set var pizza to true, like this! var pizza = true;</b-list-group-item>
                     </b-list-group>
                   </b-col>
                 </b-row>
@@ -41,6 +41,7 @@ Set your variable to true by typing this: var pizza = true; "></b-form-textarea>
                   </div>
               <div class="card-footer">
                 <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
+                <b-btn @click="showReset" variant="danger" block>Reset my Code</b-btn>
               </div>
             </b-card>
           </b-col>
@@ -96,6 +97,15 @@ Set your variable to true by typing this: var pizza = true; </p>
       <b-btn class="mt-3" variant="danger" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
 
+    <b-modal ref="resetRef" hide-footer title="Codemoji Objects">
+      <div class="d-block text-center">
+        <h4>Are you sure you want to reset your code?</h4>
+      </div>
+      <b-row>
+        <b-btn class="mt-3" variant="danger" block @click="resetCode"style="width: 50%">Yes, reset my code</b-btn>
+        <b-btn class="mt-3" block variant="primary" style="width: 50%" @click="hideReset">No, let me keep trying!</b-btn>
+      </b-row>
+    </b-modal>
   </div>
   </div>
 </template>
@@ -136,6 +146,10 @@ export default {
       this.pizza = true;
       this.$refs.myModalRef.hide();
     },
+    resetCode () {
+      this.code = ``
+      this.$refs.resetRef.hide()
+    },
     changeLesson () {
       this.$emit('lessonChanged')
     },
@@ -150,6 +164,12 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+    },
+    showReset() {
+      this.$refs.resetRef.show()
+    },
+    hideReset() {
+      this.$refs.resetRef.hide()
     },
     checkAnswer() {
       let myAnswer = this.code.toLowerCase().split('');

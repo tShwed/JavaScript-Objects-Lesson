@@ -11,17 +11,17 @@
 
         <b-col class="col-md-3 d-flex align-items-stretch">
 
-            <b-card header="Strings"
-                header-tag="header">
-              <b-form-textarea plaintext style="width: 289px; height: 515px;" value="Now that we understand how booleans and numbers can be stored and used in variables, we’ll look at another type of data, a String.
+            <b-card header="Lesson Instructions"
+                header-tag="header" style="min-width: 100%">
+              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="Now that we understand how booleans and numbers can be stored and used in variables, we’ll look at another type of data, a String.
 
-              A string is a collection of characters that are surrounded by either single(‘ ’) or double(“ ”) quotes. These characters can be anything: letters, numbers, or symbols. As long as they are wrapped by single or double quotes, JavaScript will read the data as a string.
+A string is a collection of characters that are surrounded by either single(‘ ’) or double(“ ”) quotes. These characters can be anything: letters, numbers, or symbols. As long as they are wrapped by single or double quotes, JavaScript will read the data as a string.
 
-              Strings can be used for a variety of different things, but the most common is to display a message to the user of your website or app.
+Strings can be used for a variety of different things, but the most common is to display a message to the user of your website or app.
 
-              Let’s put a string inside of our pizza variable. Let’s put your name in a string along with pizza at the end, so everyone knows this is your pizza. Remember, you can use either single or double quotes.
+Let’s put a string inside of our pizza variable. Let’s put your name in a string along with pizza at the end, so everyone knows this is your pizza. Remember, you can use either single or double quotes.
 
-              Make your code look like this: var pizza = “Leo’s Pizza” replace Leo with your name"></b-form-textarea>
+Make your code look like this: var pizza = “Jim’s Pizza” "></b-form-textarea>
         </b-card>
           </b-col>
 
@@ -46,14 +46,13 @@
                 </md-card-media>
               </md-card>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
-              <b-btn @click="resetCode" variant="danger" block>Reset</b-btn>
+              <b-btn @click="showReset" variant="danger" block>Reset</b-btn>
             </b-card>
           </b-col>
 
           <b-col class="col-md-4 d-flex align-items-stretch">
-            <b-card header="Chef's Table"
+            <b-card :header="pizzaLabel"
                 header-tag="header">
-              <h5>{{pizzaLabel}}</h5>
               <div class="text-center parent">
                 <transition name="fade" mode="out-in">
                   <img class="pizza" src="../../../pizza.jpg">
@@ -102,6 +101,16 @@
       <p>{{ errorMessage }}</p>
       <b-btn class="mt-3" variant="danger" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
+
+  <b-modal ref="resetRef" hide-footer title="Codemoji Objects">
+    <div class="d-block text-center">
+      <h4>Are you sure you want to reset your code?</h4>
+    </div>
+    <b-row>
+      <b-btn class="mt-3" variant="danger" block @click="resetCode"style="width: 50%">Yes, reset my code</b-btn>
+      <b-btn class="mt-3" block variant="primary" style="width: 50%" @click="hideReset">No, let me keep trying!</b-btn>
+    </b-row>
+  </b-modal>
   </div>
 
   </div>
@@ -120,7 +129,7 @@ export default {
       max: 100,
       showLessonDetails: true,
       errorMessage: '',
-      pizzaLabel: ' ',
+      pizzaLabel: "Jim's Pizza",
       pizza: false,
       cmOption: {
         styleActiveLine: false,
@@ -139,6 +148,7 @@ export default {
     },
     resetCode () {
       this.code = `var myName = "Jim";`
+      this.$refs.resetRef.hide()
     },
     showPizza () {
       this.pizza = true;
@@ -156,6 +166,12 @@ export default {
     hideError() {
       this.$refs.myErrorRef.hide();
       this.errorMessage = ''
+    },
+    showReset() {
+      this.$refs.resetRef.show()
+    },
+    hideReset() {
+      this.$refs.resetRef.hide()
     },
     checkAnswer() {
       let myAnswer = this.code.toLowerCase().split('');

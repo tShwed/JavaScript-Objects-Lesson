@@ -11,13 +11,13 @@
     <b-container fluid>
       <b-row>
         <b-col class="col-md-3 d-flex align-items-stretch">
-            <b-card header="What is a Variable?"
-                header-tag="header">
-            <b-form-textarea plaintext style="width: 289px; height: 515px;" value="Today we’re going to learn about how to store and use information in JavaScript! To teach you all about these concepts, you’re going to be a chef and create a pizza with the programming skills we teach you!
+            <b-card header="Lesson Instructions"
+                header-tag="header" style="min-width: 100%;">
+            <b-form-textarea plaintext style="width: 100%; height: 515px;" value="Today we’re going to learn about how to store and use information in JavaScript! To teach you all about these concepts, you’re going to be a chef and create a pizza with the programming skills we teach you!
 
 First, we’ll start with a Variable. A variable is a container used to store information in Javascript. You represent a variable with the keyword “Var”. Once we type the keyword “Var”, we can then name the container (or variable) anything we want!
 
-              Let’s start by creating a Pizza variable. In the code editor (or Pizza creation station), type: 'var pizza;' without the quotation marks. Give it a try!"></b-form-textarea>
+Let’s start by creating a Pizza variable. In the code editor (or Pizza creation station), type: 'var pizza;' without the quotation marks. Give it a try!"></b-form-textarea>
         </b-card>
           </b-col>
 
@@ -29,7 +29,7 @@ First, we’ll start with a Variable. A variable is a container used to store in
                     <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
                     <b-col class="col-md-9">
                       <b-list-group>
-                        <b-list-group-item style="border: none"> Create a variable and name it pizza.<br><br> Your code should look like this: var pizza;<br><br> Don't forget the semicolon!</b-list-group-item>
+                        <b-list-group-item style="border: none"> Create a variable and name it pizza.<br>Your code should look like this: var pizza;<br>Don't forget the semicolon!</b-list-group-item>
                       </b-list-group>
                     </b-col>
                   </b-row>
@@ -39,6 +39,7 @@ First, we’ll start with a Variable. A variable is a container used to store in
                     </div>
               <div class="card-footer">
                 <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
+                <b-btn @click="showReset" variant="danger" block>Reset my Code</b-btn>
               </div>
             </b-card>
           </b-col>
@@ -82,6 +83,15 @@ Let’s start by creating a Pizza variable. In the code editor (or Pizza creatio
       <b-btn class="mt-3" variant="danger" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
 
+    <b-modal ref="resetRef" hide-footer title="Codemoji Objects">
+      <div class="d-block text-center">
+        <h4>Are you sure you want to reset your code?</h4>
+      </div>
+      <b-row>
+        <b-btn class="mt-3" variant="danger" block @click="resetCode"style="width: 50%">Yes, reset my code</b-btn>
+        <b-btn class="mt-3" block variant="primary" style="width: 50%" @click="hideReset">No, let me keep trying!</b-btn>
+      </b-row>
+    </b-modal>
   </div>
 
   </div>
@@ -122,6 +132,10 @@ export default {
       this.$refs.myModalRef.hide()
       this.$emit('lessonChanged')
     },
+    resetCode () {
+      this.code = ``
+      this.$refs.resetRef.hide()
+    },
     showModal () {
       this.$refs.myModalRef.show()
     },
@@ -136,6 +150,12 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+    },
+    showReset() {
+      this.$refs.resetRef.show()
+    },
+    hideReset() {
+      this.$refs.resetRef.hide()
     },
     checkAnswer() {
       let myAnswer = this.code.toLowerCase().split('');

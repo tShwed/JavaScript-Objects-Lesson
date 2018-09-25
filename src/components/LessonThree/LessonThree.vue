@@ -11,9 +11,9 @@
 
         <b-col class="col-md-3 d-flex align-items-stretch">
 
-            <b-card header="Naming variables using camel case"
-                header-tag="header">
-            <b-form-textarea style="width: 289px; height: 515px;" plaintext :value="lessonDetails"></b-form-textarea>
+            <b-card header="Lesson Instructions"
+                header-tag="header" style="min-width: 100%">
+            <b-form-textarea style="width: 100%; height: 515px;" plaintext :value="lessonDetails"></b-form-textarea>
         </b-card>
           </b-col>
 
@@ -25,7 +25,7 @@
                   <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
                   <b-col class="col-md-9">
                     <b-list-group>
-                      <b-list-group-item> 1: Give your variable the name 'pepperoni pizza' using camel case;</b-list-group-item>
+                      <b-list-group-item>Give your variable the name 'pepperoni pizza' using camel case;</b-list-group-item>
                     </b-list-group>
                   </b-col>
                 </b-row>
@@ -34,6 +34,7 @@
                     <codemirror v-model="code" :options="cmOption"></codemirror>
                   </div>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
+              <b-btn @click="showReset" variant="danger" block>Reset my Code</b-btn>
             </b-card>
           </b-col>
 
@@ -90,8 +91,16 @@
       <b-btn class="mt-3" variant="danger" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
 
+    <b-modal ref="resetRef" hide-footer title="Codemoji Objects">
+      <div class="d-block text-center">
+        <h4>Are you sure you want to reset your code?</h4>
+      </div>
+      <b-row>
+        <b-btn class="mt-3" variant="danger" block @click="resetCode"style="width: 50%">Yes, reset my code</b-btn>
+        <b-btn class="mt-3" block variant="primary" style="width: 50%" @click="hideReset">No, let me keep trying!</b-btn>
+      </b-row>
+    </b-modal>
   </div>
-
   </div>
 </template>
 
@@ -121,20 +130,20 @@ export default {
       errorMessage: '',
       lessonDetails: 'You’ve filled your variable with some data, awesome! Before we continue with filling our variables with other types of data, we should touch on how to properly name our variables.\n' +
         '\n' +
-        '              There are 4 things to remember when choosing names for our variables:\n' +
+        'There are 4 things to remember when choosing names for our variables:\n' +
         '\n' +
-        '              You must give your variable a unique name. Two variables cannot have the same name in your program\n' +
-        '              Variables are case sensitive. If I named one variable “PIZZA” and another variable “pizza”, these would be considered two different variables. You would never want to differentiate two variables only by upper and lower case, as this would make your program very confusing.\n' +
-        '              There cannot be any spaces in your variables.\n' +
-        '              You cannot make your variable a number. You can put numbers in your variable names, but they must be combined with letters. It is recommended not to use numbers in your variable names\n' +
+        'You must give your variable a unique name. Two variables cannot have the same name in your program\n' +
+        'Variables are case sensitive. If I named one variable “PIZZA” and another variable “pizza”, these would be considered two different variables. You would never want to differentiate two variables only by upper and lower case, as this would make your program very confusing.\n' +
+        'There cannot be any spaces in your variables.\n' +
+        'You cannot make your variable a number. You can put numbers in your variable names, but they must be combined with letters. It is recommended not to use numbers in your variable names\n' +
         '\n' +
-        '              With these four rules in mind, we can properly name our variables.\n' +
+        'With these four rules in mind, we can properly name our variables.\n' +
         '\n' +
-        '              If we want to use more than two words to name our variables, we use a practice called camel case. Camel case is when you make your variable all one word and use uppercase letters when a new word begins. It is called camel case because it makes your variable names look like it has humps, like a camel. You always start your variable name with a lowercase letter Ex. Pepperoni pizza in camel case is pepperoniPizza\n' +
+        'If we want to use more than two words to name our variables, we use a practice called camel case. Camel case is when you make your variable all one word and use uppercase letters when a new word begins. It is called camel case because it makes your variable names look like it has humps, like a camel. You always start your variable name with a lowercase letter Ex. Pepperoni pizza in camel case is pepperoniPizza\n' +
         '\n' +
-        '              We use camel case to make our variable names very clear for what they’re being used for and easy to read.\n' +
+        'We use camel case to make our variable names very clear for what they’re being used for and easy to read.\n' +
         '\n' +
-        '              Let’s fix the following variable names and write them in camel case\n' +
+        'Let’s fix the following variable names and write them in camel case\n' +
         '            '
     }
   },
@@ -145,6 +154,10 @@ export default {
     changeLesson () {
       this.$refs.myModalRef.hide()
       this.$emit('lessonChanged')
+    },
+    resetCode () {
+      this.code = ``
+      this.$refs.resetRef.hide()
     },
     showModal () {
       this.$refs.myModalRef.show()
@@ -157,6 +170,12 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+    },
+    showReset() {
+      this.$refs.resetRef.show()
+    },
+    hideReset() {
+      this.$refs.resetRef.hide()
     },
     checkAnswer() {
       let myAnswer = this.code.split('');

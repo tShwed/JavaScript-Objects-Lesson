@@ -44,6 +44,14 @@
       <div v-else-if="lessonEleven">
         <app-lesson-eleven :lessonEleven="lessonEleven" @lessonChanged="lessonEleven=!lessonEleven"></app-lesson-eleven>
       </div>
+
+      <div v-else-if="lessonTwelve">
+        <app-lesson-twelve :lessonTwelve="lessonTwelve" @lessonChanged="lessonTwelve=!lessonTwelve"></app-lesson-twelve>
+      </div>
+
+      <div v-else-if="lessonThirteen">
+        <app-lesson-thirteen :lessonThirteen="lessonThirteen" @lessonChanged="lessonThirteen=!lessonThirteen"></app-lesson-thirteen>
+      </div>
       <!-- <button class="btn btn-primary" @click="lessonOne=!lessonOne">Next Lesson</button> -->
   </div>
 </template>
@@ -60,6 +68,8 @@ import LessonEight from './components/LessonEight/LessonEight'
 import LessonNine from './components/LessonNine/LessonNine'
 import LessonTen from './components/LessonTen/LessonTen'
 import LessonEleven from './components/LessonEleven/LessonEleven'
+import LessonTwelve from './components/LessonTwelve/LessonTwelve'
+import LessonThirteen from './components/LessonThirteen/LessonThirteen'
 export default {
   data() {
     return {
@@ -73,7 +83,9 @@ export default {
       lessonEight: false,
       lessonNine: false,
       lessonTen: false,
-      lessonEleven: true
+      lessonEleven: false,
+      lessonTwelve: false,
+      lessonThirteen: true
     }
   },
   components: {
@@ -87,7 +99,9 @@ export default {
     appLessonEight: LessonEight,
     appLessonNine: LessonNine,
     appLessonTen: LessonTen,
-    appLessonEleven: LessonEleven
+    appLessonEleven: LessonEleven,
+    appLessonTwelve: LessonTwelve,
+    appLessonThirteen: LessonThirteen
   }
 }
 </script>
@@ -125,5 +139,8 @@ export default {
     background-color: white;
     border: none;
     padding: 1px;
+    margin-top: 100px;
+    width: 50%;
+    float: right;
   }
 </style>

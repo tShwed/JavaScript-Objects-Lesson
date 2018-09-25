@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-container fluid>
-      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 11 of 20</h3>
+      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 12 of 20</h3>
       <b-progress height="20px" :value="value" :max="max"></b-progress>
     </b-container>
     <br>
@@ -13,30 +13,21 @@
 
             <b-card header="Lesson Instructions"
                 header-tag="header" style="min-width: 100%">
-              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="Now we know how to use strings, awesome! We’re one step closer to creating pizza’s.
+              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="We’ve made a ton of progress so far! We’ve learned how to manipulate different data types like strings and numbers.
 
-Another cool thing we can do with our strings is combine them together.
+Now we’re going to learn how to store lots of different types of information into one variable with something called an Array.
 
-Let’s say we have multiple variables, each with separate strings like this:
+An array can store any number of strings or numbers. They are really useful for holding a lot of different data in one place. They are represented with square brackets, like this:
 
-Var hawaiian = “Hawaiian ”
-Var pizza = “pizza”
+Var myArray = [];
 
-We can combine these two strings to make a string “Hawaiian Pizza”. Remeber when you’re combining two strings, add a space between the two variables so it wont say “Hawaiianpizza”
-Write it like this:
+You store multiple values in an array by separating them with commas, like this:
 
-Var hPizza = hawaiian + ‘ ‘ +pizza
+Var myArray = [“Hello”, 2, “You!”]
 
-There are 4 variables that exist in this program:
+Let’s put the type of pizza we want and the number of pizza’s in an array.
 
-Var iLove= “I love”
-Var pep = “pepperoni pizza”
-Var haw = “ hawaiian pizza”
-Var cheese = “cheese pizza”
-
-Your job is to combine iLove with one of the pizza variables.
-
-Let's give it a try
+Set a variable called myPizza and put a string called “pepperoni” and the number 1
 "
 ></b-form-textarea>
         </b-card>
@@ -51,9 +42,8 @@ Let's give it a try
                   <b-col class="col-md-9">
                     <b-list-group>
                       <b-list-group-item>
-                        1) Write a new variable called favouritePizza<br>
-                        2) Combine the variable iLove with the variable that has your favourite of the three pizza's in it
-                        (Remember: pep = pepperoni pizza, haw = hawaiian pizza, cheese = cheese pizza!)
+                        1) Write a new variable called pizzaArray with an array<br>
+                        2) Fill the array with a string called "pepperoni", the number 1, and set a boolean to true
                       </b-list-group-item>
                     </b-list-group>
                   </b-col>
@@ -78,17 +68,11 @@ Let's give it a try
                 <transition name="fade" mode="out-in">
                   <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
                 </transition>
-                <transition name="fade" mode="out-in">
-                  <img v-if="haw" class="pizza" src="../../../hawaiian.png">
-                </transition>
-                <transition name="fade" mode="out-in">
-                  <img v-if="cheese" class="pizza" src="../../../cheese.png">
-                </transition>
 
                 <img class="cuttingboard" src="../../../cuttingboard.png">
               </div>
               <div class="card-footer">
-                <b-btn v-if="pizza||cheese||haw" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
+                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
               </div>
             </b-card>
           </b-col>
@@ -100,33 +84,23 @@ Let's give it a try
 <div>
   <b-modal v-model ="showLessonDetails" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h4>Lesson 11: Combining Strings</h4>
+        <h4>Lesson 12: Arrays</h4>
       </div>
-    Now we know how to use strings, awesome! We’re one step closer to creating pizza’s.
+    We’ve made a ton of progress so far! We’ve learned how to manipulate different data types like strings and numbers.
 
-    Another cool thing we can do with our strings is combine them together.
+    Now we’re going to learn how to store lots of different types of information into one variable with something called an Array.
 
-    Let’s say we have multiple variables, each with separate strings like this:
+    An array can store any number of strings or numbers. They are really useful for holding a lot of different data in one place. They are represented with square brackets, like this:
 
-    Var hawaiian = “Hawaiian ”
-    Var pizza = “pizza”
+    Var myArray = [];
 
-    We can combine these two strings to make a string “Hawaiian Pizza”. Remeber when you’re combining two strings, add a space between the two variables so it wont say “Hawaiianpizza”
-    Write it like this:
+    You store multiple values in an array by separating them with commas, like this:
 
-    Var hPizza = hawaiian + ‘ ‘ +pizza
+    Var myArray = [“Hello”, 2, “You!”]
 
-    There are 4 variables that exist in this program:
+    Let’s put the type of pizza we want and the number of pizza’s in an array.
 
-    Var iLove= “I love”
-    Var pep = “pepperoni pizza”
-    Var haw = “ hawaiian pizza”
-    Var che = “cheese pizza”
-
-    Your job is to combine iLove with one of the pizza variables.
-
-    Let's give it a try
-
+    Set a variable called pizzaArray and put a string called “pepperoni”, the second element as the number 1, and the third as a boolean set to true
     <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
     <b-modal ref="myModalRef" hide-footer title="Codemoji JavaScript">
@@ -166,11 +140,8 @@ export default {
       code: ``,
       showAlert: false,
       showOnloadModal: true,
-      answer: '',
-      answer1: `varfavouritepizza=ilove+''+pep;`,
-      answer2: `varfavouritepizza=ilove+''+che;`,
-      answer3: `varfavouritepizza=ilove+''+haw;`,
-      value: 55,
+      answer: 'varpizzaarray=["pepperoni",1,true];',
+      value: 60,
       max: 100,
       showLessonDetails: true,
       errorMessage: '',
@@ -197,13 +168,7 @@ export default {
       this.$refs.resetRef.hide()
     },
     showPizza () {
-      if (this.answer === this.answer1){
-        this.pizza = true;
-      } else if (this.answer === this.answer2) {
-        this.cheese = true
-      } else if (this.answer === this.answer3) {
-        this.haw = true
-      }
+      this.pizza = true;
       this.$refs.myModalRef.hide();
     },
     showModal () {
@@ -217,6 +182,7 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+      this.errorMessage = ''
     },
     showReset() {
       this.$refs.resetRef.show()
@@ -238,35 +204,33 @@ export default {
 
         if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
-      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11]+myAnswer[12]+myAnswer[13]+myAnswer[14]+myAnswer[15]+myAnswer[16] !== 'favouritepizza') {
-        this.errorMessage = "Looks like you forgot to type 'myName' or misspelled it, go back and try again!";
-      } else if (myAnswer[17]!=='=') {
+      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11]+myAnswer[12] !== 'pizzaarray') {
+        this.errorMessage = "Looks like you forgot to type 'pizzaArray' or misspelled it, go back and try again!";
+      } else if (myAnswer[13]!=='=') {
         this.errorMessage = "Looks like you missed your equals sign after your variable name. Place one there and try again!"
-      } else if(myAnswer[18]+myAnswer[19]+myAnswer[20]+myAnswer[21]+myAnswer[22] !== 'ilove') {
-          this.errorMessage = "Dont forget the iLove variable!"
-      } else if (myAnswer[23] !== '+') {
-        this.errorMessage = "Looks like the first plus symbol. Add it and try again"
-      } else if(myAnswer[24]+myAnswer[25]!== "''" && myAnswer[24]+myAnswer[25] !== '""') {
-        this.errorMessage = "Don't forget to add a space between two quotation marks to separate your strings!"
-      } else if(myAnswer[26] !== '+') {
-        this.errorMessage = "Looks like you missed your second plus symbol. Add it and try again!"
-      } else if(myAnswer[27]+ myAnswer[28]+myAnswer[29] !== 'pep' && myAnswer[27]+ myAnswer[28]+myAnswer[29] !== 'haw' &&  myAnswer[27]+ myAnswer[28]+myAnswer[29] !== 'che') {
-        this.errorMessage = "Looks like you misspelled which pizza you'd like to say is your favourite, or forgot to add it. Try again!"
-      } else if (myAnswer[30] !== ';') {
-        this.errorMessage = "Don't forget the semicolon!"
-      }
-
-      if(myAnswer[27]+ myAnswer[28]+myAnswer[29] === 'pep') {
-        this.answer = this.answer1
-      } else if (myAnswer[27]+ myAnswer[28]+myAnswer[29] === 'che') {
-        this.answer = this.answer2
-      } else if (myAnswer[27]+ myAnswer[28]+myAnswer[29] === 'haw') {
-        this.answer = this.answer3
-      }
+      } else if(myAnswer[14]!== '[') {
+          this.errorMessage = "Looks like you forgot your first square bracket. Go back and add one! (Remember, this is a square bracket: ["
+      } else if (myAnswer[15]+myAnswer[16]+myAnswer[17]+myAnswer[18]+myAnswer[19]+myAnswer[20]+myAnswer[21]+myAnswer[22]+myAnswer[23]+myAnswer[24]+myAnswer[25] !== '"pepperoni"'&& myAnswer[15]+myAnswer[16]+myAnswer[17]+myAnswer[18]+myAnswer[19]+myAnswer[20]+myAnswer[21]+myAnswer[22]+myAnswer[23]+myAnswer[24]+myAnswer[25] !== "'pepperoni'") {
+        this.errorMessage = "Looks like you misspelled pepperoni, or forgot to make it a string. Surround the word pepperoni with either single or double quotation marks! "
+      } else if(myAnswer[26]!== ",") {
+        this.errorMessage = "Elements in an array are separated by comma's. Looks like you forgot the first one. Add it and try again! "
+      } else if(myAnswer[27] !== '1') {
+        this.errorMessage = "Remember to set the second element to the number 1!"
+      } else if(myAnswer[28] !== ',') {
+        this.errorMessage = "Looks like you forgot your second comma between 1 and true, try again!"
+      } else if (myAnswer[29]+myAnswer[30]+myAnswer[31]+myAnswer[32] !== 'true') {
+        this.errorMessage = "Don't forget to set the third element in the array to true. Try again!"
+      } else if (myAnswer[33] !== ']') {
+          this.errorMessage = "Looks like you forgot your closing square bracket, try again! Remember, a closing square bracket looks like this: ]"
+        }
+        else if(myAnswer[34] !== ';') {
+          this.errorMessage = "Don't forget your semi colon!"
+        }
+      console.log(myAnswer)
       myAnswer= myAnswer.join('');
-      if(myAnswer === this.answer) {
+      if(this.errorMessage === '') {
         this.showModal();
-      } else if (myAnswer !== this.answer){
+      } else {
         this.showError();
       }
     }

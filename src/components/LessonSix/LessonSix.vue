@@ -11,14 +11,14 @@
 
         <b-col class="col-md-3 d-flex align-items-stretch">
 
-            <b-card header="Adding Numbers in Variables"
-                header-tag="header">
-              <b-form-textarea plaintext style="width: 289px; height: 515px;" value="Now that we’ve filled our pizza variable with a number, we can change it by using add (+), subtract (-), multiply(*), or divide (/).
+            <b-card header="Lesson Instructions"
+                header-tag="header" style="min-width: 100%">
+              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="Now that we’ve filled our pizza variable with a number, we can change it by using add (+), subtract (-), multiply(*), or divide (/).
 
-              Let's start by adding two numbers together, like this;
-              var add = 1+1;
+Let's start by adding two numbers together, like this;
+var add = 1+1;
 
-              Add one more cheese pizza to the cheese pizza variable"></b-form-textarea>
+Add one more cheese pizza to the cheese pizza variable"></b-form-textarea>
         </b-card>
           </b-col>
 
@@ -39,7 +39,7 @@
                     <codemirror :value="this.code" v-model="code" :options="cmOption"></codemirror>
                   </div>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
-              <b-btn @click="resetCode" class="btn-block" variant="danger">Reset Code</b-btn>
+              <b-btn @click="showReset" class="btn-block" variant="danger">Reset Code</b-btn>
             </b-card>
           </b-col>
 
@@ -91,6 +91,16 @@
       <p>{{ errorMessage }}</p>
       <b-btn class="mt-3" variant="danger" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
+
+  <b-modal ref="resetRef" hide-footer title="Codemoji Objects">
+    <div class="d-block text-center">
+      <h4>Are you sure you want to reset your code?</h4>
+    </div>
+    <b-row>
+      <b-btn class="mt-3" variant="danger" block @click="resetCode"style="width: 50%">Yes, reset my code</b-btn>
+      <b-btn class="mt-3" block variant="primary" style="width: 50%" @click="hideReset">No, let me keep trying!</b-btn>
+    </b-row>
+  </b-modal>
   </div>
   </div>
 </template>
@@ -115,7 +125,12 @@ export default {
       max: 100,
       showLessonDetails: true,
       errorMessage: '',
-      pizza: false
+      pizza: false,
+      cmOption: {
+        styleActiveLine: false,
+        lineNumbers: true,
+        line: true,
+      }
     }
   },
   components: {
@@ -128,6 +143,7 @@ export default {
     },
     resetCode () {
       this.code = 'var cheesePizza = 1;'
+      this.$refs.resetRef.hide()
     },
     showPizza () {
       this.pizza = true;
@@ -144,6 +160,12 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+    },
+    showReset() {
+      this.$refs.resetRef.show()
+    },
+    hideReset() {
+      this.$refs.resetRef.hide()
     },
     checkAnswer() {
       let myAnswer = this.code.toLowerCase().split('');
@@ -226,6 +248,9 @@ a {
   color: #42b983;
 }
 
+.chef {
+  width: 75%
+}
 .fade-enter {
         opacity: 0;
     }

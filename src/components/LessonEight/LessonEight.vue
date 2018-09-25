@@ -11,14 +11,14 @@
 
         <b-col class="col-md-3 d-flex align-items-stretch">
 
-            <b-card header="Multiplying Numbers in Variables"
-                header-tag="header">
+            <b-card header="Lesson Instructions"
+                header-tag="header" style="min-width: 100%">
             <p class="card-text">We've successfully added and subtracted two numbers in a variable! Now let's multiplying two numbers.
 
-              Let's start by multiplying two numbers, like this;
-              var multiply = 2*3;
+Let's start by multiplying two numbers, like this;
+var multiply = 2*3;
 
-              Multiply your four pizzas by two
+Multiply your four pizzas by two
             </p>
         </b-card>
           </b-col>
@@ -40,7 +40,7 @@
                     <codemirror v-model="code" :options="cmOption">{{code}}</codemirror>
                   </div>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
-              <b-btn @click="resetCode" block variant="danger">Reset</b-btn>
+              <b-btn @click="showReset" block variant="danger">Reset</b-btn>
             </b-card>
           </b-col>
 
@@ -93,8 +93,17 @@
       <p>{{ errorMessage }}</p>
       <b-btn class="mt-3" variant="danger" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
-  </div>
 
+  <b-modal ref="resetRef" hide-footer title="Codemoji Objects">
+    <div class="d-block text-center">
+      <h4>Are you sure you want to reset your code?</h4>
+    </div>
+    <b-row>
+      <b-btn class="mt-3" variant="danger" block @click="resetCode"style="width: 50%">Yes, reset my code</b-btn>
+      <b-btn class="mt-3" block variant="primary" style="width: 50%" @click="hideReset">No, let me keep trying!</b-btn>
+    </b-row>
+  </b-modal>
+  </div>
   </div>
 </template>
 
@@ -134,6 +143,7 @@ export default {
     },
     resetCode () {
       this.code = 'var meatPizza = 4;'
+      this.$refs.resetRef.hide()
     },
     showPizza () {
       this.pizza = true;
@@ -150,6 +160,12 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+    },
+    showReset() {
+      this.$refs.resetRef.show()
+    },
+    hideReset() {
+      this.$refs.resetRef.hide()
     },
     checkAnswer() {
       let myAnswer = this.code.toLowerCase().split('');

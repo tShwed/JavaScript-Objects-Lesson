@@ -11,15 +11,14 @@
 
         <b-col class="col-md-3 d-flex align-items-stretch">
 
-            <b-card header="Lesson 7"
-                header-tag="header"
-                title="Subtracting Numbers in Variables">
+            <b-card header="Lesson Instructions"
+                header-tag="header" style="min-width: 100%">
             <p class="card-text">We've successfully added two numbers in a variable! Now let's subtract two numbers.
 
-              Let's start by adding two numbers together, like this;
-              var subtract = 1-1;
+Let's start by adding two numbers together, like this;
+var subtract = 1-1;
 
-              Subtract three pepperoni pizza's from your pizza variable
+Subtract three pepperoni pizza's from your pizza variable
             </p>
         </b-card>
           </b-col>
@@ -41,7 +40,7 @@
                     <codemirror v-model="code" :options="cmOption">{{code}}</codemirror>
                   </div>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
-              <b-btn @click="resetCode" class="btn-block" variant="danger">Reset Code</b-btn>
+              <b-btn @click="showReset" class="btn-block" variant="danger">Reset Code</b-btn>
             </b-card>
           </b-col>
 
@@ -94,9 +93,18 @@
       <p>{{ errorMessage }}</p>
       <b-btn class="mt-3" variant="success" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
-  <b-btn @click="resetCode" variant="error">Reset</b-btn>
-  </div>
 
+  <b-modal ref="resetRef" hide-footer title="Codemoji Objects">
+    <div class="d-block text-center">
+      <h4>Are you sure you want to reset your code?</h4>
+    </div>
+    <b-row>
+      <b-btn class="mt-3" variant="danger" block @click="resetCode"style="width: 50%">Yes, reset my code</b-btn>
+      <b-btn class="mt-3" block variant="primary" style="width: 50%" @click="hideReset">No, let me keep trying!</b-btn>
+    </b-row>
+  </b-modal>
+
+  </div>
   </div>
 </template>
 
@@ -137,6 +145,7 @@ export default {
     },
     resetCode () {
       this.code = 'var pepperoniPizza = 7;'
+      this.$refs.resetRef.hide();
     },
     showPizza () {
       this.pizza = true;
@@ -153,6 +162,12 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+    },
+    showReset() {
+      this.$refs.resetRef.show();
+    },
+    hideReset() {
+      this.$refs.resetRef.hide()
     },
     checkAnswer() {
       let myAnswer = this.code.toLowerCase().split('');

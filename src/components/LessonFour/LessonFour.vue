@@ -11,15 +11,15 @@
 
         <b-col class="col-md-3 d-flex align-items-stretch">
 
-            <b-card header="Comments in JavaScript Code"
-                header-tag="header">
-              <b-form-textarea plaintext style="width: 289px; height: 515px;" value="As our code gets more complicated, it becomes harder to understand. This is why JavaScript lets us leave notes in our code that is ignored by our computer when it runs our programs. These notes are called Comments.
+            <b-card header="Lesson Instructions"
+                header-tag="header" style="min-width: 100%">
+              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="As our code gets more complicated, it becomes harder to understand. This is why JavaScript lets us leave notes in our code that is ignored by our computer when it runs our programs. These notes are called Comments.
 
-              Comments are notes that can be left in JavaScript for the purpose of explaining the code we wrote to other programmers who may be working with our code, or ourselves in the future if we have to work with the code in the future. It’s easy to forget why we wrote our code and what our programs do!
+Comments are notes that can be left in JavaScript for the purpose of explaining the code we wrote to other programmers who may be working with our code, or ourselves in the future if we have to work with the code in the future. It’s easy to forget why we wrote our code and what our programs do!
 
-              To write a comment, simply type two backslashes ( // ) and type whatever comment you want into the code.
+To write a comment, simply type two backslashes ( // ) and type whatever comment you want into the code.
 
-              Write a comment in the editor that says “// My first comment!”"></b-form-textarea>
+Let's try writing a comment in the editor!"></b-form-textarea>
         </b-card>
           </b-col>
 
@@ -31,7 +31,7 @@
                   <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
                   <b-col class="col-md-9">
                     <b-list-group>
-                      <b-list-group-item> 1: Write a comment in your JavaScript code. Like this: //Hello, I am a comment!</b-list-group-item>
+                      <b-list-group-item>Write a comment in your JavaScript code. Like this: //Hello, I am a comment!</b-list-group-item>
                     </b-list-group>
                   </b-col>
                 </b-row>
@@ -44,6 +44,7 @@
                 </md-card-media>
               </md-card>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
+              <b-btn @click="showReset" variant="danger" block>Reset my Code</b-btn>
             </b-card>
           </b-col>
 
@@ -73,7 +74,7 @@
 
     To write a comment, simply type two backslashes ( // ) and type whatever comment you want into the code.
 
-    Write a comment in the editor that says “// My first comment!”
+    Let's try writing a comment in the editor!
 
     <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
@@ -92,8 +93,16 @@
       <b-btn class="mt-3" variant="danger" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
 
+  <b-modal ref="resetRef" hide-footer title="Codemoji Objects">
+    <div class="d-block text-center">
+      <h4>Are you sure you want to reset your code?</h4>
+    </div>
+    <b-row>
+      <b-btn class="mt-3" variant="danger" block @click="resetCode"style="width: 50%">Yes, reset my code</b-btn>
+      <b-btn class="mt-3" block variant="primary" style="width: 50%" @click="hideReset">No, let me keep trying!</b-btn>
+    </b-row>
+  </b-modal>
   </div>
-
   </div>
 </template>
 
@@ -131,6 +140,10 @@ export default {
       this.$refs.myModalRef.hide()
       this.$emit('lessonChanged')
     },
+    resetCode () {
+      this.code = ``
+      this.$refs.resetRef.hide()
+    },
     showModal() {
       this.$refs.myModalRef.show()
     },
@@ -142,6 +155,12 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+    },
+    showReset() {
+      this.$refs.resetRef.show()
+    },
+    hideReset() {
+      this.$refs.resetRef.hide()
     },
     checkAnswer() {
       let myAnswer = this.code.toLowerCase().split('');
@@ -204,6 +223,9 @@ a {
   color: #42b983;
 }
 
+.chef {
+  width: 75%
+}
 .fade-enter {
         opacity: 0;
     }
