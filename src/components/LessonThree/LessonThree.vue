@@ -45,6 +45,9 @@
               <img class="pizza" src="../../../pizza.jpg">
               <img class="cuttingboard" src="../../../cuttingboard.png">
               </div>
+              <div class="card-footer">
+                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
+              </div>
             </b-card>
           </b-col>
 
@@ -170,6 +173,7 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+      this.errorMessage = ''
     },
     showReset() {
       this.$refs.resetRef.show()
@@ -178,33 +182,29 @@ export default {
       this.$refs.resetRef.hide()
     },
     checkAnswer() {
-      let myAnswer = this.code.split('');
+      let potentialAnswer = this.code.split('');
+      let myAnswer =[]
       //removes spaces from code so that students won't get errors for spacing
-      for(let i = 0; i < myAnswer.length; i++) {
-        if (myAnswer[i] === ' ') {
-          console.log(myAnswer)
-          myAnswer.splice(i, 1);
+      for(let i = 0; i < potentialAnswer.length; i++) {
+        if (potentialAnswer[i] !== " "&& potentialAnswer[i] !== '\n') {
+          myAnswer.push(potentialAnswer[i]);
         }
       }
 
-      if(myAnswer.length > 17) {
-        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var pepperoniPizza;"
-      } else if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
+      if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
       } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11] !== 'pepperoni') {
         this.errorMessage = "Looks like you forgot to type 'pepperoni' or misspelled it, go back and try again!";
-      } else if (myAnswer[12]+myAnswer[13]+myAnswer[14]+myAnswer[15]+myAnswer[16] !== 'pizza') {
+      } else if (myAnswer[12]+myAnswer[13]+myAnswer[14]+myAnswer[15]+myAnswer[16] !== 'Pizza') {
         this.errorMessage = "Looks like you forgot to type 'Pizza', misspelled it, or forgot to write pizza with a capital P, go back and try again!";
       } else if(myAnswer[17]!==';') {
         this.errorMessage = "Whoops, looks like you missed a semicolon (;), make sure to add one after the word 'pizza'!"
-      } else if(myAnswer!== this.answer) {
-        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var pepperoniPizza;"
       }
 
       myAnswer= myAnswer.join('');
-      if(myAnswer == this.answer) {
+      if(this.errorMessage === '') {
         this.showModal();
-      } else if (myAnswer !== this.answer){
+      } else {
         this.showError();
       }
     }

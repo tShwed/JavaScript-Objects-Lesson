@@ -55,6 +55,9 @@ Let's try writing a comment in the editor!"></b-form-textarea>
               <img class="pizza" src="../../../pizza.jpg">
               <img class="cuttingboard" src="../../../cuttingboard.png">
               </div>
+              <div class="card-footer">
+                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
+              </div>
             </b-card>
           </b-col>
 

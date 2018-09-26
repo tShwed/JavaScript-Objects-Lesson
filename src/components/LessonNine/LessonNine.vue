@@ -157,6 +157,7 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+      this.errorMessage = ''
     },
     showReset() {
       this.$refs.resetRef.show()
@@ -165,22 +166,20 @@ export default {
       this.$refs.resetRef.hide()
     },
     checkAnswer() {
-      let myAnswer = this.code.toLowerCase().split('');
+      let potentialAnswer = this.code.split('');
+      let myAnswer =[]
       //removes spaces from code so that students won't get errors for spacing
-      for(let i = 0; i < myAnswer.length; i++) {
-        if (myAnswer[i] === ' ') {
-          console.log(myAnswer)
-          myAnswer.splice(i, 1);
+      for(let i = 0; i < potentialAnswer.length; i++) {
+        if (potentialAnswer[i] !== " "&& potentialAnswer[i] !== '\n') {
+          myAnswer.push(potentialAnswer[i]);
         }
       }
 
-      if(myAnswer.length> 22) {
-        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var vegetablePizza = 6/3;"
-      } else if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
+      if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
       } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11] !== 'vegetable') {
         this.errorMessage = "Looks like you forgot to type 'vegetable' or misspelled it, go back and try again!";
-      } else if(myAnswer[12]+myAnswer[13]+myAnswer[14]+myAnswer[15]+myAnswer[16] !== 'pizza') {
+      } else if(myAnswer[12]+myAnswer[13]+myAnswer[14]+myAnswer[15]+myAnswer[16] !== 'Pizza') {
         this.errorMessage = "Looks like you forgot to type 'pizza' or misspelled it, go back and try again!";
       } else if (myAnswer[17]!=='=') {
         this.errorMessage = "Looks like you missed your equals sign after pizza. Place one there and try again!"
@@ -188,14 +187,12 @@ export default {
         this.errorMessage = "Looks like you either forgot to type 6/3 or mis-typed it. Try again!"
       } else if(myAnswer[21]!==';') {
         this.errorMessage = "Whoops, looks like you missed a semicolon (;), make sure to add one after the word 'pizza'!"
-      } else if(myAnswer!== this.answer) {
-        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var vegetablePizza = 6/3;"
       }
 
       myAnswer= myAnswer.join('');
-      if(myAnswer == this.answer) {
+      if(this.errorMessage === '') {
         this.showModal();
-      } else if (myAnswer !== this.answer){
+      } else {
         this.showError();
       }
     }

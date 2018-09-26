@@ -91,7 +91,7 @@ Subtract three pepperoni pizza's from your pizza variable
         <h4>Hmm, that's not quite right</h4>
       </div>
       <p>{{ errorMessage }}</p>
-      <b-btn class="mt-3" variant="success" block @click="hideError">Let me try again!</b-btn>
+      <b-btn class="mt-3" variant="danger" block @click="hideError">Let me try again!</b-btn>
     </b-modal>
 
   <b-modal ref="resetRef" hide-footer title="Codemoji Objects">
@@ -162,6 +162,7 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+      this.errorMessage = ''
     },
     showReset() {
       this.$refs.resetRef.show();
@@ -170,18 +171,16 @@ export default {
       this.$refs.resetRef.hide()
     },
     checkAnswer() {
-      let myAnswer = this.code.toLowerCase().split('');
+      let potentialAnswer = this.code.toLowerCase().split('');
+      let myAnswer =[]
       //removes spaces from code so that students won't get errors for spacing
-      for(let i = 0; i < myAnswer.length; i++) {
-        if (myAnswer[i] === ' ') {
-          console.log(myAnswer)
-          myAnswer.splice(i, 1);
+      for(let i = 0; i < potentialAnswer.length; i++) {
+        if (potentialAnswer[i] !== " "&& potentialAnswer[i] !== '\n') {
+          myAnswer.push(potentialAnswer[i]);
         }
       }
 
-      if(myAnswer.length> 22) {
-        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var pepperoniPizza = 7-3;"
-      } else if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
+      if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
       } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11] !== 'pepperoni') {
         this.errorMessage = "Looks like you forgot to type 'pepperoni' or misspelled it, go back and try again!";
@@ -193,14 +192,12 @@ export default {
         this.errorMessage = "Looks like you either forgot to type 7-3 or mis-typed it. Try again!"
       } else if(myAnswer[21]!==';') {
         this.errorMessage = "Whoops, looks like you missed a semicolon (;), make sure to add one after the word 'pizza'!"
-      } else if(myAnswer!== this.answer) {
-        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var pepperoniPizza = 7-3;"
       }
 
       myAnswer= myAnswer.join('');
-      if(myAnswer == this.answer) {
+      if(this.errorMessage === '') {
         this.showModal();
-      } else if (myAnswer !== this.answer){
+      } else {
         this.showError();
       }
     }

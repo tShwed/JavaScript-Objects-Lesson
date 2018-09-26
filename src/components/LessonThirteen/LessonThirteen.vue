@@ -39,7 +39,7 @@ Let’s give this a try by looking at a variable containing all different types 
                   <b-col class="col-md-9">
                     <b-list-group>
                       <b-list-group-item>
-                        This is our food variable: var food = ["pizza", "hamburger", "sandwich"<br>
+                        This is our food variable: <br>var food = ["pizza", "hamburger", "sandwich"];<br>
                         Access the first element of this array with a variable called myLunch
                       </b-list-group-item>
                     </b-list-group>
@@ -183,16 +183,14 @@ export default {
       this.$refs.resetRef.hide()
     },
     checkAnswer() {
-      let myAnswer = this.code.split('');
+      let potentialAnswer = this.code.split('');
+      let myAnswer =[]
       //removes spaces from code so that students won't get errors for spacing
-      for(let i = 0; i < myAnswer.length; i++) {
-        if (myAnswer[i] === ' ') {
-          console.log(myAnswer)
-          myAnswer.splice(i, 1);
+      for(let i = 0; i < potentialAnswer.length; i++) {
+        if (potentialAnswer[i] !== " "&& potentialAnswer[i] !== '\n') {
+          myAnswer.push(potentialAnswer[i]);
         }
       }
-
-      let answerLength = myAnswer.length
 
         if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";

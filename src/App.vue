@@ -34,25 +34,36 @@
       </div>
 
       <div v-else-if="lessonNine">
-        <app-lesson-nine :lessonNine="lessonNine" @lessonChanged="lessonNine=!lessonNine"></app-lesson-nine>
+        <app-lesson-nine :lessonNine="lessonNine" @lessonChanged="lessonNine=!lessonNine; lessonTen=!lessonTen"></app-lesson-nine>
       </div>
 
       <div v-else-if="lessonTen">
-        <app-lesson-ten :lessonTen="lessonTen" @lessonChanged="lessonTen=!lessonTen"></app-lesson-ten>
+        <app-lesson-ten :lessonTen="lessonTen" @lessonChanged="lessonTen=!lessonTen; lessonEleven=!lessonEleven"></app-lesson-ten>
       </div>
 
       <div v-else-if="lessonEleven">
-        <app-lesson-eleven :lessonEleven="lessonEleven" @lessonChanged="lessonEleven=!lessonEleven"></app-lesson-eleven>
+        <app-lesson-eleven :lessonEleven="lessonEleven" @lessonChanged="lessonEleven=!lessonEleven; lessonTwelve=!lessonTwelve"></app-lesson-eleven>
       </div>
 
       <div v-else-if="lessonTwelve">
-        <app-lesson-twelve :lessonTwelve="lessonTwelve" @lessonChanged="lessonTwelve=!lessonTwelve"></app-lesson-twelve>
+        <app-lesson-twelve :lessonTwelve="lessonTwelve" @lessonChanged="lessonTwelve=!lessonTwelve; lessonThirteen=!lessonThirteen"></app-lesson-twelve>
       </div>
 
       <div v-else-if="lessonThirteen">
-        <app-lesson-thirteen :lessonThirteen="lessonThirteen" @lessonChanged="lessonThirteen=!lessonThirteen"></app-lesson-thirteen>
+        <app-lesson-thirteen :lessonThirteen="lessonThirteen" @lessonChanged="lessonThirteen=!lessonThirteen; lessonFourteen=!lessonFourteen"></app-lesson-thirteen>
       </div>
-      <!-- <button class="btn btn-primary" @click="lessonOne=!lessonOne">Next Lesson</button> -->
+
+      <div v-else-if="lessonFourteen">
+        <app-lesson-fourteen :lessonFourteen="lessonFourteen" @lessonChanged="lessonFourteen=!lessonFourteen; lessonFifteen=!lessonFifteen "></app-lesson-fourteen>
+      </div>
+
+      <div v-else-if="lessonFifteen">
+        <app-lesson-fifteen :lessonFifteen="lessonFifteen" @lessonChanged="lessonFifteen=!lessonFifteen; lessonSixteen=!lessonSixteen "></app-lesson-fifteen>
+      </div>
+
+      <div v-else-if="lessonSixteen">
+        <app-lesson-sixteen :lessonFifteen="lessonSixteen" @lessonChanged="lessonSixteen=!lessonSixteen; lessonFifteen=!lessonFifteen "></app-lesson-sixteen>
+      </div>
   </div>
 </template>
 
@@ -70,6 +81,9 @@ import LessonTen from './components/LessonTen/LessonTen'
 import LessonEleven from './components/LessonEleven/LessonEleven'
 import LessonTwelve from './components/LessonTwelve/LessonTwelve'
 import LessonThirteen from './components/LessonThirteen/LessonThirteen'
+import LessonFourteen from './components/LessonFourteen/LessonFourteen'
+import LessonFifteen from './components/LessonFifteen/LessonFifteen'
+import LessonSixteen from './components/LessonSixteen/LessonSixteen'
 export default {
   data() {
     return {
@@ -85,7 +99,10 @@ export default {
       lessonTen: false,
       lessonEleven: false,
       lessonTwelve: false,
-      lessonThirteen: false
+      lessonThirteen: false,
+      lessonFourteen: false,
+      lessonFifteen: false,
+      lessonSixteen: false
     }
   },
   components: {
@@ -101,7 +118,10 @@ export default {
     appLessonTen: LessonTen,
     appLessonEleven: LessonEleven,
     appLessonTwelve: LessonTwelve,
-    appLessonThirteen: LessonThirteen
+    appLessonThirteen: LessonThirteen,
+    appLessonFourteen: LessonFourteen,
+    appLessonFifteen: LessonFifteen,
+    appLessonSixteen: LessonSixteen
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-container fluid>
-      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 6 of 20</h3>
+      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 14 of 20</h3>
       <b-progress height="20px" :value="value" :max="max"></b-progress>
     </b-container>
     <br>
@@ -13,12 +13,29 @@
 
             <b-card header="Lesson Instructions"
                 header-tag="header" style="min-width: 100%">
-              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="Now that we’ve filled our pizza variable with a number, we can change it by using add (+), subtract (-), multiply(*), or divide (/).
+              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="Congratulations for making it this far. We’ve covered a lot of important information that will be super important to any sort of JavaScript development you might do.
 
-Let's start by adding two numbers together, like this;
-var add = 1+1;
+Now it’s time to cover one of the most important data properties in JavaScript: Objects
 
-Add one more cheese pizza to the cheese pizza variable"></b-form-textarea>
+Take a look around you. Everything in the room could be defined as an object. You might see a desk, a chair, or maybe a book.
+Now think of the qualities of that desk, chair, or book. What color is the desk? How many legs does it have? What is it made of? How many pages does the book have? Who is the author? What’s the genre of the book?
+
+These qualities, or properties, define what makes up an object. Note that similar objects share the same properties, but may have different values for those properties. For example, all books have pages, but not all books have the same number of pages. Properties can be filled with strings, numbers, booleans, and even arrays! Exactly like we’ve learned. You can also name properties whatever you want.
+
+Objects in JavaScript are used to model real-world objects, giving them properties and behavior just like their real-world counterparts. Here's an example using these concepts to create a pizza object:
+
+Var pizza: {
+ cheese: “mozzerella”,
+ meat: [“bacon”, “ham”],
+ fruit: “pineapple”,
+ tomatoSauce: true
+}
+
+Objects are surrounded by curly braces { }
+
+Let’s create our first object
+"
+></b-form-textarea>
         </b-card>
           </b-col>
 
@@ -30,27 +47,34 @@ Add one more cheese pizza to the cheese pizza variable"></b-form-textarea>
                   <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
                   <b-col class="col-md-9">
                     <b-list-group>
-                      <b-list-group-item> Add another pizza to your variable</b-list-group-item>
+                      <b-list-group-item>
+                        Create a variable called pizza as an object. Remember to use curly braces! { }
+                      </b-list-group-item>
                     </b-list-group>
                   </b-col>
                 </b-row>
               </b-container>
+              <md-card>
+                <md-card-media>
                   <div class="codemirror">
-                    <codemirror :value="this.code" v-model="code" :options="cmOption"></codemirror>
+                    <codemirror v-model="code" :options="cmOption"></codemirror>
                   </div>
+                </md-card-media>
+              </md-card>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
-              <b-btn @click="showReset" class="btn-block" variant="danger">Reset Code</b-btn>
+              <b-btn @click="showReset" variant="danger" block>Reset</b-btn>
             </b-card>
           </b-col>
 
           <b-col class="col-md-4 d-flex align-items-stretch">
             <b-card header="Chef's Table"
                 header-tag="header">
-            <div class="text-center parent">
-              <transition name="fade" mode="out-in">
-                <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
-              </transition>
-                  <img class="cuttingboard" src="../../../cuttingboard.png">
+              <div class="text-center parent">
+                <transition name="fade" mode="out-in">
+                  <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
+                </transition>
+
+                <img class="cuttingboard" src="../../../cuttingboard.png">
               </div>
               <div class="card-footer">
                 <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
@@ -61,20 +85,33 @@ Add one more cheese pizza to the cheese pizza variable"></b-form-textarea>
       </b-row>
     </b-container>
 
-    <br>
 
 <div>
   <b-modal v-model ="showLessonDetails" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h4>Lesson 6: Adding Numbers in Variables</h4>
+        <h4>Lesson 14: Objects</h4>
       </div>
-    Now that we’ve filled our pizza variable with a number, we can change it by using add (+), subtract (-), multiply(*), or divide (/).
+    Congratulations for making it this far. We’ve covered a lot of important information that will be super important to any sort of JavaScript development you might do.
 
-    Let's start by adding two numbers together, like this;
-    var add = 1+1;
+    Now it’s time to cover one of the most important data properties in JavaScript: Objects
 
-    Add one more cheese pizza to the cheese pizza variable
+    Take a look around you. Everything in the room could be defined as an object. You might see a desk, a chair, or maybe a book.
+    Now think of the qualities of that desk, chair, or book. What color is the desk? How many legs does it have? What is it made of? How many pages does the book have? Who is the author? What’s the genre of the book?
 
+    These qualities, or properties, define what makes up an object. Note that similar objects share the same properties, but may have different values for those properties. For example, all books have pages, but not all books have the same number of pages. Properties can be filled with strings, numbers, booleans, and even arrays! Exactly like we’ve learned. You can also name properties whatever you want.
+
+    Objects in JavaScript are used to model real-world objects, giving them properties and behavior just like their real-world counterparts. Here's an example using these concepts to create a pizza object:
+
+    Var pizza: {
+    cheese: “mozzerella”,
+    meat: [“bacon”, “ham”],
+    fruit: “pineapple”,
+    tomatoSauce: true
+    }
+
+    Objects are surrounded by curly braces { }
+
+    Let’s create our first object
     <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
     <b-modal ref="myModalRef" hide-footer title="Codemoji JavaScript">
@@ -102,26 +139,20 @@ Add one more cheese pizza to the cheese pizza variable"></b-form-textarea>
     </b-row>
   </b-modal>
   </div>
+
   </div>
 </template>
 
 <script>
-  // language
-  import 'codemirror/mode/javascript/javascript.js'
-  // require active-line.js
-  import'codemirror/addon/selection/active-line.js'
-  import'codemirror/mode/clike/clike.js'
-  import'codemirror/addon/comment/comment.js'
-
 import Output from "./Output";
 export default {
   data() {
     return {
-      code: `var cheesePizza = 1;`,
+      code: ``,
       showAlert: false,
       showOnloadModal: true,
-      answer: `varcheesepizza=1+1;`,
-      value: 30,
+      answer: 'varpizza={};',
+      value: 70,
       max: 100,
       showLessonDetails: true,
       errorMessage: '',
@@ -142,7 +173,7 @@ export default {
       this.$emit('lessonChanged')
     },
     resetCode () {
-      this.code = 'var cheesePizza = 1;'
+      this.code = ``
       this.$refs.resetRef.hide()
     },
     showPizza () {
@@ -160,7 +191,7 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
-      this.errorMessage =''
+      this.errorMessage = ''
     },
     showReset() {
       this.$refs.resetRef.show()
@@ -169,7 +200,7 @@ export default {
       this.$refs.resetRef.hide()
     },
     checkAnswer() {
-      let potentialAnswer = this.code.toLowerCase().split('');
+      let potentialAnswer = this.code.split('');
       let myAnswer =[]
       //removes spaces from code so that students won't get errors for spacing
       for(let i = 0; i < potentialAnswer.length; i++) {
@@ -178,19 +209,17 @@ export default {
         }
       }
 
-      if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
+        if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
-      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8] !== 'cheese') {
-        this.errorMessage = "Looks like you forgot to type 'cheese' or misspelled it, go back and try again!";
-      } else if(myAnswer[9]+myAnswer[10]+myAnswer[11]+myAnswer[12]+myAnswer[13] !== 'pizza') {
+      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7] !== 'pizza') {
         this.errorMessage = "Looks like you forgot to type 'pizza' or misspelled it, go back and try again!";
-      } else if (myAnswer[14]!=='=') {
-        this.errorMessage = "Looks like you missed your equals sign after pizza. Place one there and try again!"
-      } else if (myAnswer[15]+myAnswer[16]+myAnswer[17] !== "1+1") {
-        this.errorMessage = "Looks like you either forgot to type 1+1 or mis-typed it. Try again!"
-      } else if(myAnswer[18]!==';') {
-        this.errorMessage = "Whoops, looks like you missed a semicolon (;), make sure to add one after the word 'pizza'!"
-      }
+      } else if (myAnswer[8]!=='=') {
+        this.errorMessage = "Looks like you missed your equals sign after your variable name. Place one there and try again!"
+      } else if(myAnswer[9]+myAnswer[10]!== '{}') {
+          this.errorMessage = "Remember your curly braces! Curly braces define an object. They look like this: { }"
+      } else if (myAnswer[11] !== ';') {
+          this.errorMessage = "Don't forget your semi colon!"
+        }
 
       myAnswer= myAnswer.join('');
       if(this.errorMessage === '') {
@@ -200,7 +229,6 @@ export default {
       }
     }
   }
-
 }
 </script>
 
@@ -211,7 +239,9 @@ export default {
   top: 0;
   left: 0;
 }
-
+.CodeMirror {
+  height: 250px
+}
 
 .cuttingboard {
   width: 93%;
@@ -245,9 +275,6 @@ a {
   color: #42b983;
 }
 
-.chef {
-  width: 75%
-}
 .fade-enter {
         opacity: 0;
     }
@@ -258,4 +285,7 @@ a {
         transition: opactiy 0.5s;
         opacity: 0;
     }
+.chef {
+  width: 75%;
+}
 </style>

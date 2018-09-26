@@ -174,7 +174,7 @@ export default {
       this.$refs.resetRef.hide()
     },
     checkAnswer() {
-      let myAnswer = this.code.toLowerCase().split('');
+      let myAnswer = this.code.split('');
       //removes spaces from code so that students won't get errors for spacing
       for(let i = 0; i < myAnswer.length; i++) {
         if (myAnswer[i] === ' ') {
@@ -187,7 +187,7 @@ export default {
 
       if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
-      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8] !== 'myname') {
+      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8] !== 'myName') {
         this.errorMessage = "Looks like you forgot to type 'myName' or misspelled it, go back and try again!";
       } else if (myAnswer[9]!=='=') {
         this.errorMessage = "Looks like you missed your equals sign after your variable name. Place one there and try again!"

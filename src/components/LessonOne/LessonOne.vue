@@ -37,10 +37,8 @@ Let’s start by creating a Pizza variable. In the code editor (or Pizza creatio
                     <div class="codemirror">
                       <codemirror :value ="code" v-model="code" :options="cmOption"></codemirror>
                     </div>
-              <div class="card-footer">
                 <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
                 <b-btn @click="showReset" variant="danger" block>Reset my Code</b-btn>
-              </div>
             </b-card>
           </b-col>
 
@@ -150,6 +148,7 @@ export default {
     },
     hideError() {
       this.$refs.myErrorRef.hide();
+      this.errorMessage = ''
     },
     showReset() {
       this.$refs.resetRef.show()
@@ -158,17 +157,16 @@ export default {
       this.$refs.resetRef.hide()
     },
     checkAnswer() {
-      let myAnswer = this.code.toLowerCase().split('');
+      let potentialAnswer = this.code.toLowerCase().split('');
+      let myAnswer =[]
       //removes spaces from code so that students won't get errors for spacing
-      for(let i = 0; i < myAnswer.length; i++) {
-        if (myAnswer[i] == ' ') {
-          myAnswer.splice(i, 1);
+      for(let i = 0; i < potentialAnswer.length; i++) {
+        if (potentialAnswer[i] !== " "&& potentialAnswer[i] !== '\n') {
+          myAnswer.push(potentialAnswer[i]);
         }
       }
 
-      if(myAnswer.length > 8) {
-        this.errorMessage = "Looks like you missed a few things. Make sure your code looks like this: var pizza;"
-      } else if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
+      if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you misspelled 'var', go back and try again!";
       } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7] !== 'pizza') {
         this.errorMessage = "Looks like you misspelled 'pizza', go back and try again!";
@@ -178,9 +176,9 @@ export default {
 
       myAnswer= myAnswer.join('');
 
-      if(myAnswer == this.answer) {
+      if(this.errorMessage === '') {
         this.showModal();
-      } else if (myAnswer !== this.answer){
+      } else {
         this.showError();
       }
     }

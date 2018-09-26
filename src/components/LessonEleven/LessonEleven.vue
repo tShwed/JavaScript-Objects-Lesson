@@ -59,13 +59,9 @@ Let's give it a try
                   </b-col>
                 </b-row>
               </b-container>
-              <md-card>
-                <md-card-media>
                   <div class="codemirror">
                     <codemirror v-model="code" :options="cmOption"></codemirror>
                   </div>
-                </md-card-media>
-              </md-card>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
               <b-btn @click="showReset" variant="danger" block>Reset</b-btn>
             </b-card>

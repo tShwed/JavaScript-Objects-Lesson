@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-container fluid>
-      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 8 of 20</h3>
+      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 16 of 20</h3>
       <b-progress height="20px" :value="value" :max="max"></b-progress>
     </b-container>
     <br>
@@ -13,13 +13,16 @@
 
             <b-card header="Lesson Instructions"
                 header-tag="header" style="min-width: 100%">
-            <p class="card-text">We've successfully added and subtracted two numbers in a variable! Now let's multiplying two numbers.
+              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="Just like arrays, we can access the information that we store in our object.
 
-Let's start by multiplying two numbers, like this;
-var multiply = 2*3;
+For this, we use dot notation. Dot notation allows us to access data from our object as long as we know the name of the property.
 
-Multiply your four pizzas by two
-            </p>
+For example, if we want to access the cheese property in our pizza variable, we would say pizza.cheese
+
+Let’s access the meat property from our object using dot notation
+
+"
+></b-form-textarea>
         </b-card>
           </b-col>
 
@@ -31,51 +34,58 @@ Multiply your four pizzas by two
                   <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
                   <b-col class="col-md-9">
                     <b-list-group>
-                      <b-list-group-item> Multiply your pizza's by 2;</b-list-group-item>
+                      <b-list-group-item>
+                        Create a variable called pizzaType<br><br>
+                        Access the cheese property from our pizzas object using dot notation
+                      </b-list-group-item>
                     </b-list-group>
                   </b-col>
                 </b-row>
               </b-container>
+              <md-card>
+                <md-card-media>
                   <div class="codemirror">
-                    <codemirror v-model="code" :options="cmOption">{{code}}</codemirror>
+                    <codemirror v-model="code" :options="cmOption"></codemirror>
                   </div>
+                </md-card-media>
+              </md-card>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
-              <b-btn @click="showReset" block variant="danger">Reset</b-btn>
+              <b-btn @click="showReset" variant="danger" block>Reset</b-btn>
             </b-card>
           </b-col>
 
-        <b-col class="col-md-4 d-flex align-items-stretch">
-          <b-card header="Chef's Table"
-                  header-tag="header">
-            <div class="text-center parent">
-              <transition name="fade" mode="out-in">
-                <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
-              </transition>
+          <b-col class="col-md-4 d-flex align-items-stretch">
+            <b-card header="Chef's Table"
+                header-tag="header">
+              <div class="text-center parent">
+                <transition name="fade" mode="out-in">
+                  <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
+                </transition>
 
-              <img class="cuttingboard" src="../../../cuttingboard.png">
-            </div>
-            <div class="card-footer">
-              <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
-            </div>
-          </b-card>
-        </b-col>
+                <img class="cuttingboard" src="../../../cuttingboard.png">
+              </div>
+              <div class="card-footer">
+                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
+              </div>
+            </b-card>
+          </b-col>
 
       </b-row>
     </b-container>
 
-    <br>
 
 <div>
   <b-modal v-model ="showLessonDetails" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
-        <h4>Lesson 8: Multiply Numbers in Variables</h4>
+        <h4>Lesson 16: Accessing data from Objects</h4>
       </div>
-    We've successfully added and subtracted two numbers in a variable! Now let's multiplying two numbers.
+    Just like arrays, we can access the information that we store in our object.
 
-    Let's start by multiplying two numbers, like this;
-    var multiply = 2*3;
+    For this, we use dot notation. Dot notation allows us to access data from our object as long as we know the name of the property.
 
-    Multiply your four pizzas by two
+    For example, if we want to access the cheese property in our pizza variable, we would say pizza.cheese
+
+    Let’s access the cheese property from our object using dot notation
 
     <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
@@ -104,24 +114,20 @@ Multiply your four pizzas by two
     </b-row>
   </b-modal>
   </div>
+
   </div>
 </template>
 
 <script>
-  import 'codemirror/mode/javascript/javascript.js'
-  // require active-line.js
-  import'codemirror/addon/selection/active-line.js'
-  import'codemirror/mode/clike/clike.js'
-  import'codemirror/addon/comment/comment.js'
-  import Output from "./Output";
+import Output from "./Output";
 export default {
   data() {
     return {
-      code: `var meatPizza = 4;`,
+      code: ``,
       showAlert: false,
       showOnloadModal: true,
-      answer: `varmeatpizza=4*2;`,
-      value: 40,
+      answer: 'varpizza={};',
+      value: 80,
       max: 100,
       showLessonDetails: true,
       errorMessage: '',
@@ -142,7 +148,7 @@ export default {
       this.$emit('lessonChanged')
     },
     resetCode () {
-      this.code = 'var meatPizza = 4;'
+      this.code = ``
       this.$refs.resetRef.hide()
     },
     showPizza () {
@@ -178,19 +184,23 @@ export default {
         }
       }
 
-      if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
+        if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
-      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6] !== 'meat') {
-        this.errorMessage = "Looks like you forgot to type 'meat' or misspelled it, go back and try again!";
-      } else if(myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11] !== 'Pizza') {
-        this.errorMessage = "Looks like you forgot to type 'pizza' or misspelled it, go back and try again!";
+      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11] !== 'pizzaType') {
+        this.errorMessage = "Looks like you forgot to type 'pizzaType' or misspelled it, go back and try again!";
       } else if (myAnswer[12]!=='=') {
-        this.errorMessage = "Looks like you missed your equals sign after pizza. Place one there and try again!"
-      } else if (myAnswer[13]+myAnswer[14]+myAnswer[15] !== "4*2") {
-        this.errorMessage = "Looks like you either forgot to type 4*2 or mis-typed it. Try again!"
-      } else if(myAnswer[16]!==';') {
-        this.errorMessage = "Whoops, looks like you missed a semicolon (;), make sure to add one after the word 'pizza'!"
-      }
+        this.errorMessage = "Looks like you missed your equals sign after your variable name. Place one there and try again!"
+      } else if(myAnswer[13]+myAnswer[14]+myAnswer[15]+myAnswer[16]+myAnswer[17]+myAnswer[18]!== 'pizzas') {
+          this.errorMessage = "Remember, you're accessing the pizzas object. Try again!"
+      } else if (myAnswer[19] !== '.') {
+          this.errorMessage = "Put a . between the object you're trying to access and the property"
+        }
+        else if (myAnswer[20]+myAnswer[21]+myAnswer[22]+myAnswer[23]+myAnswer[24]+myAnswer[25] !== 'cheese') {
+          this.errorMessage = "Remember, you're accessing the cheese property. Try again!"
+        }
+        else if (myAnswer[26] !== ';') {
+          this.errorMessage = "Don't forget the semi colon!"
+        }
 
       myAnswer= myAnswer.join('');
       if(this.errorMessage === '') {
@@ -200,7 +210,6 @@ export default {
       }
     }
   }
-
 }
 </script>
 
@@ -211,7 +220,9 @@ export default {
   top: 0;
   left: 0;
 }
-
+.CodeMirror {
+  height: 250px
+}
 
 .cuttingboard {
   width: 93%;
@@ -255,4 +266,7 @@ a {
         transition: opactiy 0.5s;
         opacity: 0;
     }
+.chef {
+  width: 75%;
+}
 </style>

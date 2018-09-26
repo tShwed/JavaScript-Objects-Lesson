@@ -49,13 +49,9 @@ Set a variable called myPizza and put a string called “pepperoni” and the nu
                   </b-col>
                 </b-row>
               </b-container>
-              <md-card>
-                <md-card-media>
                   <div class="codemirror">
                     <codemirror v-model="code" :options="cmOption"></codemirror>
                   </div>
-                </md-card-media>
-              </md-card>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
               <b-btn @click="showReset" variant="danger" block>Reset</b-btn>
             </b-card>
@@ -191,12 +187,12 @@ export default {
       this.$refs.resetRef.hide()
     },
     checkAnswer() {
-      let myAnswer = this.code.toLowerCase().split('');
+      let potentialAnswer = this.code.split('');
+      let myAnswer =[]
       //removes spaces from code so that students won't get errors for spacing
-      for(let i = 0; i < myAnswer.length; i++) {
-        if (myAnswer[i] === ' ') {
-          console.log(myAnswer)
-          myAnswer.splice(i, 1);
+      for(let i = 0; i < potentialAnswer.length; i++) {
+        if (potentialAnswer[i] !== " "&& potentialAnswer[i] !== '\n') {
+          myAnswer.push(potentialAnswer[i]);
         }
       }
 
@@ -204,7 +200,7 @@ export default {
 
         if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
-      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11]+myAnswer[12] !== 'pizzaarray') {
+      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11]+myAnswer[12] !== 'pizzaArray') {
         this.errorMessage = "Looks like you forgot to type 'pizzaArray' or misspelled it, go back and try again!";
       } else if (myAnswer[13]!=='=') {
         this.errorMessage = "Looks like you missed your equals sign after your variable name. Place one there and try again!"
