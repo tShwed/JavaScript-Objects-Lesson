@@ -3,7 +3,7 @@
     <b-container fluid>
       <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 1 of 20</h3>
       <b-progress>
-        <b-progress-bar height="25px" :value="value" :max="max" variant="success">{{value}}%</b-progress-bar>
+        <b-progress-bar height="25px" :value="value" :max="max" variant="success" animated>{{value}}%</b-progress-bar>
       </b-progress>
     </b-container>
     <br>
@@ -55,6 +55,20 @@ Let’s start by creating a Pizza variable. In the code editor (or Pizza creatio
     <br>
 
 <div>
+
+    <b-modal v-model="introduction" size="md" title="JavaScript Objects with Codemoji!" hide-footer>
+      <div class="d-block text-center">
+      <h4>Let us show you around before you get started:</h4>
+      <p v-if="introPage === 1">Today we're going to be making pizza with JavaScript. We're going to teach you the basics of data along with how to store and access it!</p>
+      <p v-else-if="introPage ===2">On the left, you'll see all of the instructions and information for each lesson. You'll get a pop-up with all of the lesson info but it's always there for you if you forget something</p>
+      <p v-else-if="introPage===3">In the middle, you'll see your new friend Chef Leo! Leo will be giving you all of your instructions for every lesson. He's here to help you!<br>
+You'll also find your text editor (where you'll be inputting all of your code), the submit button when you're ready to check your answer, and a handy reset button which will help you start over if you get stuck
+      </p>
+      <p v-else>On the right, you'll see your pizza's appear as you create them with JavaScript! You'll also find a "Next Lesson" button that will appear once you've got the right answer.</p>
+        <b-btn variant="success" block v-if="introPage!==4" style="float: right; width: 35%" @click="introPage++">Next {{introPage}}/4 <i class="fas fa-arrow-right"></i> </b-btn>
+      <b-btn v-if="introPage===4"class="mt-3" variant="success" block @click="introdution=!introduction; showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
+      </div>
+    </b-modal>
     <b-modal v-model ="showLessonDetails" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
         <h4>Lesson 1: What is a variable? </h4>
@@ -108,11 +122,13 @@ export default {
   data() {
     return {
       code: ``,
+      introPage: 1,
       showAlert: false,
       answer: `varpizza;`,
       value: 5,
       max: 100,
-      showLessonDetails: true,
+      showLessonDetails: false,
+      introduction: true,
       errorMessage: '',
       infoHidden: false,
       cmOption: {

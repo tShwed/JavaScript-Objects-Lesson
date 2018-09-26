@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <b-container fluid>
-      <h3 class="text-center">Lesson 3 of 20</h3>
-      <b-progress height="20px" :value="value" :max="max"></b-progress>
+      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 3 of 20</h3>
+      <b-progress>
+        <b-progress-bar height="25px" :value="value" :max="max" variant="success" animated>{{value}}%</b-progress-bar>
+      </b-progress>
     </b-container>
     <br>
 
