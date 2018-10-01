@@ -50,12 +50,15 @@ Add one more cheese pizza to the cheese pizza variable"></b-form-textarea>
                 header-tag="header">
             <div class="text-center parent">
               <transition name="fade" mode="out-in">
-                <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
+                <img class="pizza" src="../../../cheese.png">
+              </transition>
+              <transition name="fade" mode="out-in">
+                <img v-if="pizza" class="pizza2" src="../../../cheese.png">
               </transition>
                   <img class="cuttingboard" src="../../../cuttingboard.png">
               </div>
               <div class="card-footer">
-                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
+                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block pulse-button">Next lesson <i class="fas fa-arrow-right"></i></b-btn>
               </div>
             </b-card>
           </b-col>
@@ -225,12 +228,61 @@ export default {
 
 .pizza {
   position: absolute;
-  margin-top: 70px;
+  margin-top: 140px;
   margin-left: 60px;
   top: 0;
   left: 0;
   z-index: 1;
-  width: 60%;
+  width: 30%;
+}
+.pizza2 {
+  position: absolute;
+  margin-top: 140px;
+  margin-left: 200px;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 30%;
+}
+
+.pulse-button {
+  position: relative;
+  border: none;
+  box-shadow: 0 0 0 0 green;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  -webkit-animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+  -moz-animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+  -ms-animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+  animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+}
+.pulse-button:hover {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
+}
+
+@-webkit-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
+}
+@-moz-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
+}
+@-ms-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
+}
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
 }
 h1, h2 {
   font-weight: normal;

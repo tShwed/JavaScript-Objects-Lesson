@@ -87,7 +87,7 @@ import LessonSixteen from './components/LessonSixteen/LessonSixteen'
 export default {
   data() {
     return {
-      lessonOne: true,
+      lessonOne: false,
       lessonTwo: false,
       lessonThree: false,
       lessonFour: false,
@@ -95,7 +95,7 @@ export default {
       lessonSix: false,
       lessonSeven: false,
       lessonEight: false,
-      lessonNine: false,
+      lessonNine: true,
       lessonTen: false,
       lessonEleven: false,
       lessonTwelve: false,
@@ -122,6 +122,32 @@ export default {
     appLessonFourteen: LessonFourteen,
     appLessonFifteen: LessonFifteen,
     appLessonSixteen: LessonSixteen
+  },
+  methods: {
+    savePlace(a, b) {
+      let place = window.localStorage.getItem(a)
+      if(place === true) {
+
+      }
+    }
+  },
+  created() {
+    window.localStorage.setItem('lessonOne', true)
+    window.localStorage.setItem('lessonTwo', false)
+    window.localStorage.setItem('lessonThree', false)
+    window.localStorage.setItem('lessonFour', false)
+    window.localStorage.setItem('lessonFive', false)
+    window.localStorage.setItem('lessonSix', false)
+    window.localStorage.setItem('lessonSeven', false)
+    window.localStorage.setItem('lessonEight', false)
+    window.localStorage.setItem('lessonNine', false)
+    window.localStorage.setItem('lessonTen', false)
+    window.localStorage.setItem('lessonEleven', false)
+    window.localStorage.setItem('lessonTwelve', false)
+    window.localStorage.setItem('lessonThirteen', false)
+    window.localStorage.setItem('lessonFourteen', false)
+    window.localStorage.setItem('lessonFifteen', false)
+    window.localStorage.setItem('lessonSixteen', false)
   }
 }
 </script>

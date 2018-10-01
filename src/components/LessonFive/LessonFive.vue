@@ -48,15 +48,20 @@ Let’s create multiple pizza’s by setting our pizza variable to 3!"></b-form-
 
           <b-col class="col-md-4 d-flex align-items-stretch">
             <b-card header="Chef's Table"
-                header-tag="header">
-            <div class="text-center parent">
+                header-tag="header" style="min-width: 100%">
+            <b-row style="display: flex">
               <transition name="fade" mode="out-in">
-                <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
+               <b-col><img v-if="pizza" class="pizza" src="../../../pizza.jpg"></b-col>
               </transition>
-                  <img class="cuttingboard" src="../../../cuttingboard.png">
-              </div>
-              <div class="card-footer">
-                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
+              <transition name="fade" mode="out-in">
+                <b-col><img v-if="pizza" class="pizza" src="../../../pizza.jpg"></b-col>
+              </transition>
+              <transition name="fade" mode="out-in">
+                <b-col><img v-if="pizza" class="pizza" src="../../../pizza.jpg"></b-col>
+              </transition>
+            </b-row>
+              <div class="card-footer"style="margin-top: 480px">
+                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block pulse-button">Next lesson <i class="fas fa-arrow-right"></i></b-btn>
               </div>
             </b-card>
           </b-col>
@@ -225,16 +230,51 @@ export default {
 
 .pizza {
   position: absolute;
-  margin-top: 70px;
-  margin-left: 60px;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 60%;
+  width: 90%;
 }
 
 .chef {
   width: 75%
+}
+
+.pulse-button {
+  position: relative;
+  border: none;
+  box-shadow: 0 0 0 0 green;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  -webkit-animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+  -moz-animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+  -ms-animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+  animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+}
+.pulse-button:hover {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
+}
+
+@-webkit-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
+}
+@-moz-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
+}
+@-ms-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
+}
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
 }
 h1, h2 {
   font-weight: normal;

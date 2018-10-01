@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 
+import VueAnalytics from 'vue-analytics'
 //Bootstrap
 import BootstrapVue from 'bootstrap-vue'
 //import 'bootstrap/dist/css/bootstrap.css'
@@ -12,6 +13,12 @@ import 'codemirror/lib/codemirror.css'
 Vue.use(VueCodemirror);
 
 Vue.use(BootstrapVue);
+
+Vue.use(VueAnalytics, {
+  id () {
+    return 'UA-80578729-1'
+  }
+})
 
 Vue.config.productionTip = false
 

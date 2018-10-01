@@ -125,6 +125,7 @@ export default {
       introPage: 1,
       showAlert: false,
       answer: `varpizza;`,
+      pizza: false,
       value: 5,
       max: 100,
       showLessonDetails: false,

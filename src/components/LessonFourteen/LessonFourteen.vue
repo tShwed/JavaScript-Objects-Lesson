@@ -73,13 +73,13 @@ Let’s create our first object
                 header-tag="header">
               <div class="text-center parent">
                 <transition name="fade" mode="out-in">
-                  <img v-if="pizza" class="pizza" src="../../../pizza.jpg">
+                  <img class="pizza" src="../../../pizza.jpg">
                 </transition>
 
                 <img class="cuttingboard" src="../../../cuttingboard.png">
               </div>
               <div class="card-footer">
-                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block">Next lesson</b-btn>
+                <b-btn v-if="pizza" @click="changeLesson" variant="success" class="btn-block pulse-button">Next lesson <i class="fas fa-arrow-right"></i></b-btn>
               </div>
             </b-card>
           </b-col>
@@ -120,7 +120,7 @@ Let’s create our first object
       <div class="d-block text-center">
         <h4>Great job! </h4>
       </div>
-      <b-btn class="mt-3" variant="success" block @click="showPizza">Submit and show animation</b-btn>
+      <b-btn class="mt-3" variant="success" block @click="showPizza">Submit code</b-btn>
     </b-modal>
 
     <b-modal ref="myErrorRef" hide-footer title="Codemoji Objects">
@@ -261,6 +261,45 @@ export default {
   left: 0;
   z-index: 1;
   width: 60%;
+}
+.pulse-button {
+  position: relative;
+  border: none;
+  box-shadow: 0 0 0 0 green;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  -webkit-animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+  -moz-animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+  -ms-animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+  animation: pulse 2s infinite cubic-bezier(0.3, 0, 0, 1);
+}
+.pulse-button:hover {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
+}
+
+@-webkit-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
+}
+@-moz-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
+}
+@-ms-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
+}
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 10px rgba(232, 76, 61, 0);
+  }
 }
 h1, h2 {
   font-weight: normal;
