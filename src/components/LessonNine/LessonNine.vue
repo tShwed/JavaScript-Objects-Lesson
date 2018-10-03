@@ -37,13 +37,9 @@
                   </b-col>
                 </b-row>
               </b-container>
-              <md-card>
-                <md-card-media>
                   <div class="codemirror">
                     <codemirror v-model="code" :options="cmOption"></codemirror>
                   </div>
-                </md-card-media>
-              </md-card>
               <button class="btn btn-success btn-block" @click="checkAnswer">Ok! Check my code!</button>
               <b-btn @click="showReset" variant="danger" block>Reset</b-btn>
             </b-card>
@@ -54,7 +50,7 @@
                     header-tag="header"
                     style="min-width: 100%">
               <div class="text-center parent">
-                <b-row style="display: flex; width: 90%">
+                <b-row style="display: flex; width: 90%; margin: 5px;">
                   <transition name="fade" mode="out-in">
                     <b-col><img class="pizza" src="../../../veggie.jpg"></b-col>
                   </transition>
@@ -69,7 +65,7 @@
                 <br>
                 <br>
                 <br>
-                <b-row style="display: flex; width: 90%" v-if="!pizza">
+                <b-row style="display: flex; width: 90%; margin: 5px;" v-if="!pizza">
                   <transition name="fade" mode="out-in">
                     <b-col><img class="pizza" src="../../../veggie.jpg"></b-col>
                   </transition>

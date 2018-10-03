@@ -42,7 +42,9 @@ Let’s give this a try by looking at a variable containing all different types 
                     <b-list-group>
                       <b-list-group-item>
                         This is our food variable: <br>var food = ["pizza", "hamburger", "sandwich"];<br>
-                        Access the first element of this array with a variable called myLunch
+                        Access the first element of this array with a variable called myLunch<br>
+                        To access an element in an array, write the name of the array, put square brackets after that,<br>
+                        and put the number of the element that you're trying to access.
                       </b-list-group-item>
                     </b-list-group>
                   </b-col>

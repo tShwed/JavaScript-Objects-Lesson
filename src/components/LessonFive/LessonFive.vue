@@ -49,7 +49,7 @@ Let’s create multiple pizza’s by setting our pizza variable to 3!"></b-form-
           <b-col class="col-md-4 d-flex align-items-stretch">
             <b-card header="Chef's Table"
                 header-tag="header" style="min-width: 100%">
-            <b-row style="display: flex">
+            <b-row style="display: flex; margin-right: 20%;">
               <transition name="fade" mode="out-in">
                <b-col><img v-if="pizza" class="pizza" src="../../../pizza.jpg"></b-col>
               </transition>

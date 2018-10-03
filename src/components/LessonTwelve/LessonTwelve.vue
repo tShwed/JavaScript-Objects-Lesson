@@ -163,6 +163,7 @@ export default {
     },
     resetCode () {
       this.code = ``
+      this.errorMessage = ''
       this.$refs.resetRef.hide()
     },
     showPizza () {
@@ -224,12 +225,12 @@ export default {
         else if(myAnswer[34] !== ';') {
           this.errorMessage = "Don't forget your semi colon!"
         }
-      console.log(myAnswer)
       myAnswer= myAnswer.join('');
       if(this.errorMessage === '') {
         this.showModal();
       } else {
         this.showError();
+        myAnswer = []
       }
     }
   }

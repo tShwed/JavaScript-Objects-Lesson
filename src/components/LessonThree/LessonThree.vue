@@ -63,15 +63,16 @@
       <div class="d-block text-center">
         <h4>Lesson 3: Naming variables using camel case </h4>
       </div>
-    You’ve filled your variable with some data, awesome! Before we continue with filling our variables with other types of data, we should touch on how to properly name our variables.
+    <p v-if="introPage===1">You’ve filled your variable with some data, awesome! Before we continue with filling our variables with other types of data, we should touch on how to properly name our variables.</p>
 
-    There are 4 things to remember when choosing names for our variables:
+    <p v-if="introPage===2">There are 4 things to remember when choosing names for our variables:
 
     You must give your variable a unique name. Two variables cannot have the same name in your program
     Variables are case sensitive. If I named one variable “PIZZA” and another variable “pizza”, these would be considered two different variables. You would never want to differentiate two variables only by upper and lower case, as this would make your program very confusing.
     There cannot be any spaces in your variables.
     You cannot make your variable a number. You can put numbers in your variable names, but they must be combined with letters. It is recommended not to use numbers in your variable names
-
+    </p>
+    <p v-if="introPage===3">
     With these four rules in mind, we can properly name our variables.
 
     If we want to use more than two words to name our variables, we use a practice called camel case. Camel case is when you make your variable all one word and use uppercase letters when a new word begins. It is called camel case because it makes your variable names look like it has humps, like a camel. You always start your variable name with a lowercase letter Ex. Pepperoni pizza in camel case is pepperoniPizza
@@ -79,7 +80,10 @@
     We use camel case to make our variable names very clear for what they’re being used for and easy to read.
 
     Let’s fix the following variable names and write them in camel case
-      <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
+    </p>
+    <b-btn variant="success" block v-if="introPage!==3" style="float: right; width: 35%" @click="introPage++">Next {{introPage}}/3 <i class="fas fa-arrow-right"></i> </b-btn>
+
+    <b-btn class="mt-3" v-if="introPage===3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
     <b-modal ref="myModalRef" hide-footer title="Codemoji JavaScript">
       <div class="d-block text-center">
@@ -125,6 +129,7 @@ export default {
       showOnloadModal: true,
       answer: `varpepperoniPizza;`,
       pizza: false,
+      introPage: 1,
       value: 15,
       max: 100,
       showLessonDetails: true,
@@ -232,6 +237,10 @@ export default {
   top: 0;
   left: 0;
   z-index: 0;
+}
+
+.chef {
+  width: 75%
 }
 
 .pizza {
