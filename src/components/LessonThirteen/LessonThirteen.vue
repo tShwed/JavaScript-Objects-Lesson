@@ -22,6 +22,9 @@ Every element in an array gets assigned a number. As you read the data from left
 We can access these elements by using bracket notation after declaring the variable. For example:
 
 Var myArray = [“hello”, “sir”, 4]
+
+We get a value from the array like this:
+
 Var greeting = myArray[0]
 
 In this example, greeting would return “hello”
@@ -94,6 +97,9 @@ Let’s give this a try by looking at a variable containing all different types 
     We can access these elements by using bracket notation after declaring the variable. For example:
 
     Var myArray = [“hello”, “sir”, 4]
+
+    We get a value from the array like this:
+
     Var greeting = myArray[0]
 
     In this example, greeting would return “hello”
@@ -139,7 +145,7 @@ export default {
       showAlert: false,
       showOnloadModal: true,
       answer: 'varmyLunch=food[0];',
-      value: 65,
+      value: 81,
       max: 100,
       showLessonDetails: true,
       errorMessage: '',
@@ -157,10 +163,12 @@ export default {
   methods: {
     changeLesson () {
       this.$refs.myModalRef.hide()
+      this.$ga.event('lessonChange', 'lessonChanged', 'finishLessonThirteen', 13)
       this.$emit('lessonChanged')
     },
     resetCode () {
       this.code = ``
+      this.errorMessage = ''
       this.$refs.resetRef.hide()
     },
     showPizza () {
@@ -218,6 +226,7 @@ export default {
         this.showModal();
       } else {
         this.showError();
+        myAnswer = []
       }
     }
   }

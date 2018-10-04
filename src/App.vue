@@ -62,7 +62,11 @@
       </div>
 
       <div v-else-if="lessonSixteen">
-        <app-lesson-sixteen :lessonFifteen="lessonSixteen" @lessonChanged="lessonSixteen=!lessonSixteen; lessonFifteen=!lessonFifteen "></app-lesson-sixteen>
+        <app-lesson-sixteen :lessonFifteen="lessonSixteen" @lessonChanged="lessonSixteen=!lessonSixteen; congrats=!congrats "></app-lesson-sixteen>
+      </div>
+
+      <div v-else-if="congrats">
+        <app-congrats></app-congrats>
       </div>
   </div>
 </template>
@@ -84,12 +88,13 @@ import LessonThirteen from './components/LessonThirteen/LessonThirteen'
 import LessonFourteen from './components/LessonFourteen/LessonFourteen'
 import LessonFifteen from './components/LessonFifteen/LessonFifteen'
 import LessonSixteen from './components/LessonSixteen/LessonSixteen'
+import Congrats from './components/Congrats'
 export default {
   data() {
     return {
-      lessonOne: false,
+      lessonOne: true,
       lessonTwo: false,
-      lessonThree: true,
+      lessonThree: false,
       lessonFour: false,
       lessonFive: false,
       lessonSix: false,
@@ -102,7 +107,8 @@ export default {
       lessonThirteen: false,
       lessonFourteen: false,
       lessonFifteen: false,
-      lessonSixteen: false
+      lessonSixteen: false,
+      congrats: false
     }
   },
   components: {
@@ -121,7 +127,16 @@ export default {
     appLessonThirteen: LessonThirteen,
     appLessonFourteen: LessonFourteen,
     appLessonFifteen: LessonFifteen,
-    appLessonSixteen: LessonSixteen
+    appLessonSixteen: LessonSixteen,
+    appCongrats: Congrats
+  },
+  methods: {
+    track () {
+      this.$ga.page('/')
+    },
+    hardReset() {
+
+    }
   },
   created() {
     //set boolean to a string. check for that string in an if statement. If it's a certain
@@ -168,4 +183,5 @@ export default {
     width: 50%;
     float: right;
   }
+
 </style>

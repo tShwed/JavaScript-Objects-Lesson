@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-container fluid>
-      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 10 of 20</h3>
+      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 10 of 17</h3>
       <b-progress>
         <b-progress-bar height="25px" :value="value" :max="max" variant="success" animated>{{value}}%</b-progress-bar>
       </b-progress>
@@ -127,7 +127,7 @@ export default {
       showAlert: false,
       showOnloadModal: true,
       answer: `varmyName="";`,
-      value: 50,
+      value: 61,
       max: 100,
       showLessonDetails: true,
       errorMessage: '',
@@ -146,10 +146,12 @@ export default {
   methods: {
     changeLesson () {
       this.$refs.myModalRef.hide()
+      this.$ga.event('lessonChange', 'lessonChanged', 'finishLessonTen', 10)
       this.$emit('lessonChanged')
     },
     resetCode () {
       this.code = `var myName = "Jim";`
+      this.errorMessage = ''
       this.$refs.resetRef.hide()
     },
     showPizza () {
@@ -217,6 +219,7 @@ export default {
         this.pizzaLabel = studentName+"'s Pizza"
       } else if (this.errorMessage !== ''){
         this.showError();
+        myAnswer = []
       }
     }
   },
