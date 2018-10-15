@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-container fluid>
-      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 13 of 20</h3>
+      <h3 class="text-center"><img src="https://codemoji.com/images/white-logo.png" class="codemoji-logo"> Lesson 13 of 17</h3>
       <b-progress>
         <b-progress-bar height="25px" :value="value" :max="max" variant="success" animated>{{value}}%</b-progress-bar>
       </b-progress>
@@ -15,7 +15,7 @@
 
             <b-card header="Lesson Instructions"
                 header-tag="header" style="min-width: 100%">
-              <b-form-textarea plaintext style="width: 100%; height: 515px;" value="Now we know how to put our data inside an array. But how will we access it?
+              <b-form-textarea plaintext style="width: 100%; height: 100%;" value="Now we know how to put our data inside an array. But how will we access it?
 
 Every element in an array gets assigned a number. As you read the data from left to right, a number is assigned starting from zero. So the array [“hello”, “sir”, 4] would have each element represented by a number. “Hello” is assigned 0, “sir” is assigned 1, and the number 4 is assigned 2. As we add more elements to the array, the numbers continue to increment up by 1
 
@@ -30,6 +30,7 @@ Var greeting = myArray[0]
 In this example, greeting would return “hello”
 
 Let’s give this a try by looking at a variable containing all different types of food. We're going to grab pizza from the food array so we will make the variable myLunch equal to pizza
+This is our food variable: var food = ['pizza', 'hamburger', 'sandwich'];
 "
 ></b-form-textarea>
         </b-card>
@@ -44,9 +45,8 @@ Let’s give this a try by looking at a variable containing all different types 
                   <b-col class="col-md-9">
                     <b-list-group>
                       <b-list-group-item>
-                        This is our food variable: <br>var food = ["pizza", "hamburger", "sandwich"];<br>
-                        Access the first element of this array with a variable called myLunch<br>
-                        To access an element in an array, write the name of the array, put square brackets after that,<br>
+                        Access the first element of this array with a variable called myLunch
+                        To access an element in an array, write the name of the array, put square brackets after that,
                         and put the number of the element that you're trying to access.
                       </b-list-group-item>
                     </b-list-group>
@@ -104,7 +104,8 @@ Let’s give this a try by looking at a variable containing all different types 
 
     In this example, greeting would return “hello”
 
-    Let’s give this a try by looking at a variable containing all different types of food. We're going to grab pizza from the food array so we will make the variable myLunch equal to pizza
+    Let’s give this a try by looking at a variable containing all different types of food. We're going to grab pizza from the food array so we will make the variable myLunch equal to pizza<br>
+    This is our food variable: var food = ['pizza', 'hamburger', 'sandwich'];
     <b-btn class="mt-3" variant="success" block @click="showLessonDetails=!showLessonDetails">Ok, got it!</b-btn>
     </b-modal>
     <b-modal ref="myModalRef" hide-footer title="Codemoji JavaScript">
@@ -132,7 +133,7 @@ Let’s give this a try by looking at a variable containing all different types 
     </b-row>
   </b-modal>
   </div>
-
+  <p v-if="showAnswer">Answer: var myLunch = food[0];</p>
   </div>
 </template>
 
@@ -142,6 +143,8 @@ export default {
   data() {
     return {
       code: ``,
+      showAnswer: false,
+      counter: 0,
       showAlert: false,
       showOnloadModal: true,
       answer: 'varmyLunch=food[0];',
@@ -227,6 +230,7 @@ export default {
       } else {
         this.showError();
         myAnswer = []
+        this.counter++
       }
     }
   }

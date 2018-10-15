@@ -15,8 +15,9 @@ Vue.use(VueCodemirror);
 Vue.use(BootstrapVue);
 
 Vue.use(VueAnalytics, {
-  id () {
-    return 'UA-80578729-1'
+  id: 'UA-80578729-1',
+  autoTracking: {
+    screenview: true
   }
 })
 

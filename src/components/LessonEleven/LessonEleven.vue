@@ -52,9 +52,9 @@ Let's give it a try
                   <b-col class="col-md-3"><img class="chef" src="../../../cartoonchef.png"></b-col>
                   <b-col class="col-md-9">
                     <b-list-group>
-                      <b-list-group-item>
-                        1) Write a new variable called favouritePizza<br>
-                        2) Combine the variable iLove with the variable that has your favourite of the three pizza's in it
+                      <b-list-group-item style="font-size: 15px;">
+                        1) Write a new variable called favoritePizza<br>
+                        2) Combine the variable iLove with the variable that has your favorite of the three pizza's in it
                         (Remember: pep = pepperoni pizza, haw = hawaiian pizza, cheese = cheese pizza!)
                       </b-list-group-item>
                     </b-list-group>
@@ -152,7 +152,7 @@ Let's give it a try
     </b-row>
   </b-modal>
   </div>
-
+  <p style="color: white" v-if="showAnswer">Answer: var favouritePizza = iLove + ' ' +pep; OR che; OR haw;</p>
   </div>
 </template>
 
@@ -165,13 +165,15 @@ export default {
       showAlert: false,
       showOnloadModal: true,
       answer: '',
-      answer1: `varfavouritepizza=ilove+''+pep;`,
-      answer2: `varfavouritepizza=ilove+''+che;`,
-      answer3: `varfavouritepizza=ilove+''+haw;`,
+      answer1: `varfavoritepizza=ilove+''+pep;`,
+      answer2: `varfavoritepizza=ilove+''+che;`,
+      answer3: `varfavoritepizza=ilove+''+haw;`,
       value: 67,
       max: 100,
+      counter: 0,
       showLessonDetails: true,
       errorMessage: '',
+      showAnswer: false,
       pizza: false,
       cheese: false,
       haw: false,
@@ -238,29 +240,29 @@ export default {
 
         if (myAnswer[0]+myAnswer[1]+myAnswer[2] !== 'var') {
         this.errorMessage = "Looks like you either forgot to type 'var' or misspelled it, go back and try again!";
-      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11]+myAnswer[12]+myAnswer[13]+myAnswer[14]+myAnswer[15]+myAnswer[16] !== 'favouritepizza') {
-        this.errorMessage = "Looks like you forgot to type 'myName' or misspelled it, go back and try again!";
-      } else if (myAnswer[17]!=='=') {
+      } else if(myAnswer[3]+myAnswer[4]+myAnswer[5]+myAnswer[6]+myAnswer[7]+myAnswer[8]+myAnswer[9]+myAnswer[10]+myAnswer[11]+myAnswer[12]+myAnswer[13]+myAnswer[14]+myAnswer[15] !== 'favoritepizza') {
+        this.errorMessage = "Looks like you forgot to type 'favoritePizza' or misspelled it, go back and try again!";
+      } else if (myAnswer[16]!=='=') {
         this.errorMessage = "Looks like you missed your equals sign after your variable name. Place one there and try again!"
-      } else if(myAnswer[18]+myAnswer[19]+myAnswer[20]+myAnswer[21]+myAnswer[22] !== 'ilove') {
+      } else if(myAnswer[17]+myAnswer[18]+myAnswer[19]+myAnswer[20]+myAnswer[21] !== 'ilove') {
           this.errorMessage = "Dont forget the iLove variable!"
-      } else if (myAnswer[23] !== '+') {
+      } else if (myAnswer[22] !== '+') {
         this.errorMessage = "Looks like the first plus symbol. Add it and try again"
-      } else if(myAnswer[24]+myAnswer[25]!== "''" && myAnswer[24]+myAnswer[25] !== '""') {
+      } else if(myAnswer[23]+myAnswer[24]!== "''" && myAnswer[23]+myAnswer[24] !== '""') {
         this.errorMessage = "Don't forget to add a space between two quotation marks to separate your strings!"
-      } else if(myAnswer[26] !== '+') {
+      } else if(myAnswer[25] !== '+') {
         this.errorMessage = "Looks like you missed your second plus symbol. Add it and try again!"
-      } else if(myAnswer[27]+ myAnswer[28]+myAnswer[29] !== 'pep' && myAnswer[27]+ myAnswer[28]+myAnswer[29] !== 'haw' &&  myAnswer[27]+ myAnswer[28]+myAnswer[29] !== 'che') {
-        this.errorMessage = "Looks like you misspelled which pizza you'd like to say is your favourite, or forgot to add it. Try again!"
-      } else if (myAnswer[30] !== ';') {
+      } else if(myAnswer[26]+ myAnswer[27]+myAnswer[28] !== 'pep' && myAnswer[26]+ myAnswer[27]+myAnswer[28] !== 'haw' &&  myAnswer[26]+ myAnswer[27]+myAnswer[28] !== 'che') {
+        this.errorMessage = "Looks like you misspelled which pizza you'd like to say is your favorite, or forgot to add it. Try again!"
+      } else if (myAnswer[29] !== ';') {
         this.errorMessage = "Don't forget the semicolon!"
       }
 
-      if(myAnswer[27]+ myAnswer[28]+myAnswer[29] === 'pep') {
+      if(myAnswer[26]+ myAnswer[27]+myAnswer[28] === 'pep') {
         this.answer = this.answer1
-      } else if (myAnswer[27]+ myAnswer[28]+myAnswer[29] === 'che') {
+      } else if (myAnswer[26]+ myAnswer[27]+myAnswer[28] === 'che') {
         this.answer = this.answer2
-      } else if (myAnswer[27]+ myAnswer[28]+myAnswer[29] === 'haw') {
+      } else if (myAnswer[26]+ myAnswer[27]+myAnswer[28] === 'haw') {
         this.answer = this.answer3
       }
       myAnswer= myAnswer.join('');
@@ -268,7 +270,15 @@ export default {
         this.showModal();
       } else if (myAnswer !== this.answer){
         this.showError();
+        this.counter++
         myAnswer=[]
+      }
+    }
+  },
+  watch: {
+    counter() {
+      if (this.counter === 7) {
+        this.showAnswer = true
       }
     }
   }

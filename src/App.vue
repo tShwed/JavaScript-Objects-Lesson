@@ -150,6 +150,9 @@ export default {
   * {
     font-family: 'Montserrat', sans-serif;
   }
+  a {
+    color: white
+  }
   body {
     background-color: #2371c0;
   }
