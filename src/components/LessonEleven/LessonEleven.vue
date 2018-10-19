@@ -34,7 +34,7 @@ There are 4 variables that exist in this program:
 Var iLove= “I love”
 Var pep = “pepperoni pizza”
 Var haw = “ hawaiian pizza”
-Var cheese = “cheese pizza”
+Var che = “cheese pizza”
 
 Your job is to combine iLove with one of the pizza variables.
 
@@ -55,7 +55,7 @@ Let's give it a try
                       <b-list-group-item style="font-size: 15px;">
                         1) Write a new variable called favoritePizza<br>
                         2) Combine the variable iLove with the variable that has your favorite of the three pizza's in it
-                        (Remember: pep = pepperoni pizza, haw = hawaiian pizza, cheese = cheese pizza!)
+                        (Remember: pep = pepperoni pizza, haw = hawaiian pizza, che = cheese pizza!)
                       </b-list-group-item>
                     </b-list-group>
                   </b-col>
