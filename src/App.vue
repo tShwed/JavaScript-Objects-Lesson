@@ -68,6 +68,14 @@
       <div v-else-if="congrats">
         <app-congrats></app-congrats>
       </div>
+    <b-btn variant="danger" @click="showHardReset">Reset</b-btn>
+    <b-modal ref="hardResetRef" hide-footer title="Codemoji Objects">
+      <div class="d-block text-center">
+        <h4>WARNING: THIS WILL ERASE YOUR PROGRESS</h4>
+      </div>
+        <b-btn class="mt-3" variant="danger" block @click="hardReset">Yes, bring me back to lesson one!</b-btn>
+        <b-btn class="mt-3" block variant="primary" @click="hideHardReset">No, I want to keep my progress!</b-btn>
+    </b-modal>
   </div>
 </template>
 
@@ -135,7 +143,29 @@ export default {
       this.$ga.page('/')
     },
     hardReset() {
-
+      this.lessonOne = true;
+      this.lessonTwo = false;
+      this.lessonThree = false
+      this.lessonFour = false
+      this.lessonFive = false
+      this.lessonSix = false
+      this.lessonSeven = false
+      this.lessonEight = false
+      this.lessonNine = false
+      this.lessonTen = false
+      this.lessonEleven = false
+      this.lessonTwelve = false
+      this.lessonThirteen = false
+      this.lessonFourteen = false
+      this.lessonFifteen = false
+      this.lessonSixteen= false
+      this.congrats = false
+    },
+    showHardReset() {
+      this.$refs.hardResetRef.show()
+    },
+    hideHardReset() {
+      this.$refs.hardResetRef.hide()
     }
   },
   created() {
