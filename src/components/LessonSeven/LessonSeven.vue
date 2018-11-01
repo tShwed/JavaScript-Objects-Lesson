@@ -168,7 +168,12 @@ export default {
   methods: {
     changeLesson () {
       this.$refs.myModalRef.hide()
-      this.$ga.event('lessonChange', 'lessonChanged', 'finishLessonSeven', 7)
+      this.$ga.event({
+        eventCategory: 'lessonChange',
+        eventAction: 'action',
+        eventLabel: 'nextLesson',
+        eventValue: 8
+      })
       this.$emit('lessonChanged')
     },
     resetCode () {

@@ -153,7 +153,12 @@ export default {
     },
     changeLesson () {
       this.$emit('lessonChanged')
-      this.$ga.event('lessonChange', 'lessonChanged', 'finishLessonTwo', 2)
+      this.$ga.event({
+        eventCategory: 'lessonChange',
+        eventAction: 'action',
+        eventLabel: 'nextLesson',
+        eventValue: 3
+      })
     },
     showModal () {
       this.$refs.myModalRef.show()
