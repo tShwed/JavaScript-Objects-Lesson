@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-
+    <b-btn variant="danger" @click="showHardReset">Reset</b-btn>
       <div v-if="lessonOne" >
       <app-lesson-one :lessonOne="lessonOne" @lessonChanged="lessonOne=!lessonOne; lessonTwo=!lessonTwo"></app-lesson-one>
       </div>
@@ -68,7 +68,6 @@
       <div v-else-if="congrats">
         <app-congrats></app-congrats>
       </div>
-    <b-btn variant="danger" @click="showHardReset">Reset</b-btn>
     <b-modal ref="hardResetRef" hide-footer title="Codemoji Objects">
       <div class="d-block text-center">
         <h4>WARNING: THIS WILL ERASE YOUR PROGRESS</h4>

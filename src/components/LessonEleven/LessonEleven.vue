@@ -282,7 +282,7 @@ export default {
   },
   watch: {
     counter() {
-      if (this.counter === 7) {
+      if (this.counter === 2) {
         this.showAnswer = true
       }
     }
