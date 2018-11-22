@@ -152,7 +152,7 @@ Let's give it a try
     </b-row>
   </b-modal>
   </div>
-  <p style="color: white" v-if="showAnswer">Answer: var favouritePizza = iLove + ' ' +pep; OR che; OR haw;</p>
+  <p style="color: white" v-if="showAnswer">Answer: var favoritePizza = iLove + ' ' +pep; OR che; OR haw;</p>
   </div>
 </template>
 
@@ -164,7 +164,7 @@ export default {
       code: ``,
       showAlert: false,
       showOnloadModal: true,
-      answer: '',
+      answer: 'sierjfnche',
       answer1: `varfavoritepizza=ilove+''+pep;`,
       answer2: `varfavoritepizza=ilove+''+che;`,
       answer3: `varfavoritepizza=ilove+''+haw;`,
